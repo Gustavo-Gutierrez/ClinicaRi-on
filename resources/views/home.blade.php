@@ -1,133 +1,184 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Consulta</title>
+@section('title', 'Formulario de Consulta')
+
 @section('content_header')
-<h1>Formulario de Consulta</h1>
+<h1>Formulario #1</h1>
 @stop
 
 @section('content')
-<style>
-    .custom-form {
-        max-width: 100%; /* Define el ancho máximo del formulario */
-        margin: 0 auto; /* Centra el formulario en el centro de la página */
-    }
-</style>
+
+<div class="floating-button" id="floatingButton">
+    <button id="textSpeechButton" type="button" class="assistant-button">
+        <i class="fas fa-microphone"></i>
+    </button>
+</div>
 
 <div class="content-wrapper">
+
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-<body>
-        <label for="nombre">Nombre del paciente:</label>
-        <input type="text" id="nombre" name="nombre" required><br>
+                        <form class="custom-form">
+                            <div class="form-group">
+                                <label for="nombre">Nombre del paciente:</label>
+                                <input type="text" id="nombre" name="nombre" required>
+                                <!-- Agrega el botón de micrófono -->
+                            </div>
 
-        <label for="fecha_nacimiento">Fecha de nacimiento:</label>
-        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required><br>
+                            <div class="form-group">
+                                <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+                                <input type="date" id="fecha de nacimiento" name="fecha de nacimiento" required>
+                            </div>
 
-        <label for="direccion">Dirección:</label>
-        <input type="text" id="direccion" name="direccion" required><br>
+                            <!-- Otros campos del formulario -->
+                            <div class="form-group">
+                                <label for="direccion">Dirección:</label>
+                                <input type="text" id="direccion" name="dirección" required><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Teléfono:</label>
+                                <input type="integer" id="telefono" name="teléfono" required><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" required><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="fecha_consulta">Fecha de la consulta:</label>
+                                <input type="date" id="fecha de la consulta" name="fecha de la consulta" required><br>
+                            </div>
 
-        <label for="telefono">Teléfono:</label>
-        <input type="integer" id="telefono" name="telefono" required><br>
+                            <div class="form-group">
+                                <label for="historia_clinica">Resumen historia clínica y examen físico:</label>
+                                <textarea id="resumen historia clínica" name="resumen historia clínica" rows="4"
+                                    required></textarea>
+                            </div>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br>
+                            <!-- Otros campos del formulario -->
+                            <div class="form-group">
+                                <label for="nefropatia">Nefropatía:</label>
+                                <input type="text" id="nefropatía" name="nefropatía"><br>
+                            </div>
 
-        <label for="fecha_consulta">Fecha de la consulta:</label>
-        <input type="date" id="fecha_consulta" name="fecha_consulta" required><br>
+                            <div class="form-group">
+                                <label for="grupo_sanguineo">Grupo Sanguíneo ABO:</label>
+                                <input type="text" id="grupo sanguíneo" name="grupo sanguíneo"><br>
+                            </div>
 
-        <div style="display: flex; align-items: flex-start;">
-        <label for="historia_clinica">Resumen historia clínica y examen físico:</label>
-        <div style="margin-left: 10px;">
-        <textarea id="historia_clinica" name="historia_clinica" rows="4" required></textarea><br>
-        </div>
-        </div>
+                            <div class="form-group">
+                                <label for="virus_hepatitis_b">VHB (Fecha):</label>
+                                <input type="text" id="virus hepatitis b" name="virus hepatitis b">
+                                <input type="date" id="virus hepatitis b" name="virus hepatitis b"><br>
+                            </div>
 
-        <label for="nefropatia">Nefropatía:</label>
-        <input type="text" id="nefropatia" name="nefropatia"><br>
+                            <div class="form-group">
+                                <label for="virus_hepatitis_c">VHC (Fecha):</label>
+                                <input type="text" id="virus hepatitis c" name="virus hepatitis c">
+                                <input type="date" id="virus hepatitis c" name="virus hepatitis c"><br>
+                            </div>
 
-        <label for="grupo_sanguineo">Grupo Sanguíneo ABO:</label>
-        <input type="text" id="grupo_sanguineo" name="grupo_sanguineo"><br>
+                            <div class="form-group">
+                                <label for="vih">VIH (Fecha):</label>
+                                <input type="text" id="vih" name="vih">
+                                <input type="date" id="vih" name="vih"><br>
+                            </div>
 
-        <label for="virus_hepatitis_b">VHB (Fecha):</label>
-        
-        <input type="text" id="virus_hepatitis_b" name="virus_hepatitis_b">
-        <input type="date" id="virus_hepatitis_b" name="virus_hepatitis_b"><br>
+                            <div class="form-group">
+                                <label for="cmv">CMV (Fecha):</label>
+                                <input type="text" id="cmv" name="cmv">
+                                <input type="date" id="cmv" name="cmv"><br>
+                            </div>
 
-        <label for="virus_hepatitis_c">VHC (Fecha):</label>
-        <input type="text" id="virus_hepatitis_c" name="virus_hepatitis_c">
-        <input type="date" id="virus_hepatitis_c" name="virus_hepatitis_c"><br>
+                            <div class="form-group">
+                                <label for="ebv">EBV (Fecha):</label>
+                                <input type="text" id="ebv" name="ebv">
+                                <input type="date" id="ebv" name="ebv"><br>
+                            </div>
 
-        <label for="vih">VIH (Fecha):</label>
-        <input type="text" id="vih" name="vih">
-        <input type="date" id="vih" name="vih"><br>
+                            <div class="form-group">
+                                <label for="fecha_dialisis">Fecha 1ª Diálisis:</label>
+                                <input type="date" id="fecha_dialisis" name="fecha_dialisis"><br>
+                            </div>
 
-        <label for="cmv">CMV (Fecha):</label>
-        <input type="text" id="cmv" name="cmv">
-        <input type="date" id="cmv" name="cmv"><br>
+                            <div class="form-group">
+                                <label for="vacunas">Vacunas:</label>
+                                <input type="text" id="vacunas" name="vacunas"><br>
+                            </div>
 
-        <label for="ebv">EBV (Fecha):</label>
-        <input type="text" id="ebv" name="ebv">
-        <input type="date" id="ebv" name="ebv"><br>
+                            <div class="form-group">
+                                <label for="grupo_donante">Grupo Sanguíneo del Donante:</label>
+                                <select id="grupo sanguíneo del donante" name="grupo sanguíneo del donante">
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    < </select>
+                                        <br>
+                            </div>
 
-        <label for="fecha_dialisis">Fecha 1ª Diálisis:</label>
-        <input type="date" id="fecha_dialisis" name="fecha_dialisis"><br>
 
-        <label for="vacunas">Vacunas:</label>
-        <input type="text" id="vacunas" name="vacunas"><br>
+                            <div class="form-group">
+                                <label for="tipo_donante">Tipo del Donante:</label>
+                                <input type="radio" id="vivo" name="tipo_donante" value="vivo">
+                                <label for="vivo">Vivo</label>
+                                <input type="radio" id="cadaver" name="tipo_donante" value="cadaver">
+                                <label for="cadaver">Cadáver</label>
+                                <br>
+                            </div>
 
-        <label for="grupo_donante">Grupo Sanguíneo del Donante:</label>
-         <select id="grupo_donante" name="grupo_donante">
-        <option value="A+">A+</option>
-        <option value="A-">A-</option>
-        <option value="B+">B+</option>
-        <option value="B-">B-</option>
-        <option value="AB+">AB+</option>
-        <option value="AB-">AB-</option>
-        <option value="O+">O+</option>
-     <option value="O-">O-</option>
-<       </select>
-        <br>
+                            <!-- Otros campos del formulario -->
 
-        <label for="tipo_donante">Tipo del Donante:</label>
-        <input type="radio" id="vivo" name="tipo_donante" value="vivo">
-        <label for="vivo">Vivo</label>
-        <input type="radio" id="cadaver" name="tipo_donante" value="cadaver">
-        <label for="cadaver">Cadáver</label>
-        <br>
+                            <div class="form-group">
+                                <label for="causa_obito">Causa del Óbito:</label>
+                                <input type="text" id="causa del óbito" name="causa del óbito">
+                            </div>
 
-        
+                            <!-- Otros campos del formulario -->
+                            <div class="form-group">
+                                <label for="hla">Histo compatibilidad HLA:</label>
+                                <input type="text" id="hla" name="hla"><br>
+                            </div>
 
-        <label for="causa_obito">Causa del Óbito:</label>
-        <input type="text" id="causa_obito" name="causa_obito"><br>
 
-        <label for="hla">Histo compatibilidad HLA:</label>
-        <input type="text" id="hla" name="hla"><br>
+                            <div class="form-group">
+                                <label for="lista_problemas">Lista de Problemas:</label>
+                                <textarea id="lista de problemas" name="lista de problemas" rows="4"
+                                    required></textarea>
+                                <label for="fecha_lista_problemas">Fecha:</label>
+                                <input type="date" id="fecha_lista_problemas" name="fecha_lista_problemas">
+                            </div>
 
-        <div style="display: flex; align-items: flex-start;">
-        <label for="lista_problemas" style="margin-top: 8px;">Lista de Problemas (Fecha):</label>
-        <div style="margin-left: 10px;">
-        <textarea id="lista_problemas" name="lista_problemas" rows="4" required></textarea>    
+                            <!-- Botón de envío -->
+                            <div class="form-group">
+                                <button type="submit">Guardar Consulta</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <label for="fecha_lista_problemas"style="margin-top: 8px;">Fecha:</label>
-            <input type="date" id="fecha_lista_problemas" name="fecha_lista_problemas"><br>
-        </div>
-        
 
-        <button type="submit">Guardar Consulta</button>
-    
-</body>
+        </div>
+
+    </div>
+
+</div>
+
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+@vite(['resources/css/form.css','resources/css/buttomassistant.css'])
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+@vite(['resources/js/assistant.js'])
 @stop

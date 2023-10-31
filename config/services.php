@@ -30,5 +30,9 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'google' => [
+        'application_credentials' => env('GOOGLE_APPLICATION_CREDENTIALS', 'google-credentials/myapp-386023-29ff015714a8.json'),
+    ],
+    
 
 ];
