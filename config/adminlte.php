@@ -63,8 +63,8 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>Clinica</b>Riñon',
+    'logo_img' => 'vendor/adminlte/dist/img/clinica.jpg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/clinica.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -109,7 +109,7 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/clinica.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
@@ -311,20 +311,41 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
-        [
+      /* [
             'text'        => 'pages',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,
             'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
+        ],*/
+        //['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
+            'text' => 'Paciente',
+            'url'  => '/pacientes',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
+            'text' => 'Doctor',
+            'url'  => '/doctores1',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Administrativo',
+            'url'  => '/administrativos',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Cita',
+            'url'  => '/citas',
+            'icon' => 'fas fa-fw fa-quote-left',
+        ],
+        [
+            'text' => 'Consulta',
+            'url'  => '/consultas',
+            'icon' => 'fas fa-fw fa-quote-left',
+        ],
+        
+        /*[
             'text' => 'change_password',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
@@ -382,7 +403,7 @@ return [
             'text'       => 'information',
             'icon_color' => 'cyan',
             'url'        => '#',
-        ],
+        ],*/
     ],
 
     /*
