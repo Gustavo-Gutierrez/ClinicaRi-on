@@ -9,21 +9,22 @@ use Spatie\Permission\Models\Permission;
 
 class RoleSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
     {
         $role1 = Role::create(['name' => 'Administrador']);
-        $role2 = Role::create(['name' => 'Comerciante']);
-        $role3 = Role::create(['name' => 'Almacenador']);
-        $role4 = Role::create(['name' => 'Supervisor']);
-        $role5 = Role::create(['name' => 'RRHH']);
-        $role6 = Role::create(['name' => 'Marketing']);
+        $role2 = Role::create(['name' => 'Doctor']);
+        $role3 = Role::create(['name' => 'Paciente']);
 
-        
-        Permission::create(['name' => 'roles.index'])->syncRoles([$role1]);
-        Permission::create(['name' => 'roles.create'])->syncRoles([$role1]);
-        Permission::create(['name' => 'roles.update'])->syncRoles([$role1]);
+        Permission::create(['name' => 'home'])->syncRoles([$role1,$role2]);
+        Permission::create(['name' => 'admin.roles.index'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.roles.create'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.roles.edit'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.roles.update'])->syncRoles([$role1]);
+
   
 
-      
     }
 }

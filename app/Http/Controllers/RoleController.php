@@ -20,14 +20,14 @@ class RoleController extends Controller
     {
         //$users = Persona::where('tipoe', 1)->paginate(10);
         $users = User::paginate(10);
-        return (view('roles.index', compact('users')));
+        return (view('admin/roles.index', compact('users')));
     }
 
 
     public function create()
     {
         $permisos = Permission::all();
-        return (view('roles.create', compact('permisos')));
+        return (view('admin/roles.create', compact('permisos')));
     }
 
 
@@ -36,7 +36,7 @@ class RoleController extends Controller
         $role = Role::create(['name' => $request->name]);
         $role->syncPermissions($request->permisos);
        
-        return redirect()->route('roles.create')->with('info', 'Se registro rol correctamente');
+        return redirect()->route('admin/roles.create')->with('info', 'Se registro rol correctamente');
     }
 
 
@@ -48,14 +48,15 @@ class RoleController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
-        return (view('roles.edit', compact('user', 'roles')));
+        return (view('admin/roles.edit', compact('user', 'roles')));
     }
 
     public function update(Request $request, User $user)
     {
         $user->roles()->sync($request->roles);
       
-        return redirect()->route('roles.edit', $user)->with('info', 'Se asigno los roles correctamente');
+        return redirect()->route('roles.edit', $user)->with('info', 'Se asignaron los roles correctamente');
+
     }
 
     public function destroy($id)

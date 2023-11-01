@@ -8,8 +8,7 @@ use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\HistorialController;
-
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\HomeController;
 /*
@@ -28,22 +27,41 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::prefix('/administrador')->group(function () {
+Route::prefix('/admin')->group(function () {
     Route::group(['middleware' => ['auth']], function () {
-        Route::get('/   roles', [RoleController::class, 'index'])->name('roles.index');
-        Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
-        Route::post('/roles/create', [RoleController::class, 'store']);
-        Route::get('/roles/edit/{user}', [RoleController::class, 'edit'])->name('roles.edit');
-        Route::put('/roles/edit/{user}', [RoleController::class, 'update'])->name('roles.update');
-    });
-    Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
-    Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
-    Route::post('/roles/create', [RoleController::class, 'store']);
-    Route::get('/roles/edit/{user}', [RoleController::class, 'edit'])->name('roles.edit');
-    Route::put('/roles/edit/{user}', [RoleController::class, 'update'])->name('roles.update');
+        Route::get('/roles', [App\Http\Controllers\RoleController::class, 'index'])
+    ->middleware('checkRole:Administrador')
+    ->name('roles.index');
+    Route::get('/roles/create', [App\Http\Controllers\RoleController::class, 'create'])
+    ->middleware('checkRole:Administrador')
+    ->name('roles.create');
+    Route::post('/roles/create', [App\Http\Controllers\RoleController::class, 'store']);
 
+    Route::get('/roles/edit/{user}', [App\Http\Controllers\RoleController::class, 'edit'])
+    ->middleware('checkRole:Administrador')
+    ->name('roles.edit');
+    Route::put('/roles/edit/{user}', [App\Http\Controllers\RoleController::class, 'update'])
+    ->middleware('checkRole:Administrador')
+    ->name('roles.update');
+
+    });
+    Route::get('/roles', [App\Http\Controllers\RoleController::class, 'index'])
+    ->middleware('checkRole:Administrador')
+    ->name('roles.index');
+    Route::get('/roles/create', [App\Http\Controllers\RoleController::class, 'create'])
+    ->middleware('checkRole:Administrador')
+    ->name('roles.create');
+    Route::post('/roles/create', [App\Http\Controllers\RoleController::class, 'store']);
+
+    Route::get('/roles/edit/{user}', [App\Http\Controllers\RoleController::class, 'edit'])
+    ->middleware('checkRole:Administrador')
+    ->name('roles.edit');
+    Route::put('/roles/edit/{user}', [App\Http\Controllers\RoleController::class, 'update'])
+    ->middleware('checkRole:Administrador')
+    ->name('roles.update');
 
 });
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('/whatsapp/webhook', [ChatbotController::class, 'handleIncomingMessage']);
