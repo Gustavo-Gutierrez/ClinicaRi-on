@@ -26,11 +26,11 @@ class HistorialController extends Controller
      */
     public function index()
     {
-        return view('historial_index');
+        return view('historial/index');
     }
     public function edit()
     {
-        return view('historial/historial_edit');
+        return view('historial/edit');
     }
     public function transcribeAudio(Request $request)
     {
