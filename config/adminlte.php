@@ -319,26 +319,41 @@ return [
             'label_color' => 'success',
         ],*/
         //['header' => 'account_settings'],
-        [
-            'text' => 'Paciente',
-            'url'  => '/pacientes',
-            'icon' => 'fas fa-fw fa-user',
+       // Este es el elemento que representa el menú deslizante
+    [
+        'text' => 'Usuarios',
+        'icon' => 'fas fa-fw fa-user',
+        'submenu' => [
+            [
+                'text' => 'Paciente',
+                'url' => '/pacientes',
+                'icon' => 'fas fa-fw fa-user',
+            ],
+            [
+                'text' => 'Doctor',
+                'url' => '/doctores1',
+                'icon' => 'fas fa-fw fa-user',
+            ],
+            [
+                'text' => 'Administrativo',
+                'url' => '/administrativos',
+                'icon' => 'fas fa-fw fa-user',
+                'submenu' =>[
+                    [
+                        'text' => 'Permisos',
+                        'url'  => 'administrador/roles',
+                        'icon' => 'fas fa-fw fa-quote-left',
+                    ],
+                ],
+                
+            ],
         ],
-        [
-            'text' => 'Doctor',
-            'url'  => '/doctores1',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Administrativo',
-            'url'  => '/administrativos',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Permisos',
-            'url'  => 'administrador/roles',
-            'icon' => 'fas fa-fw fa-quote-left',
-        ],
+    ],
+    [
+        'text' => 'Consultas',
+        'icon' => 'fas fa-fw fa-user',
+        'submenu' => [
+        
         [
             'text' => 'Cita',
             'url'  => '/citas',
@@ -349,7 +364,25 @@ return [
             'url'  => '/consultas',
             'icon' => 'fas fa-fw fa-quote-left',
         ],
-        
+    ],
+],
+[
+    'text' => 'Historiales',
+    'icon' => 'fas fa-fw fa-user',
+    'submenu' => [
+    
+    [
+        'text' => 'Historial Clinico',
+        'url'  => '/historial/edit',
+        'icon' => 'fas fa-fw fa-quote-left',
+    ],
+    [
+        'text' => 'Historial de Transplante',
+        'url'  => '',
+        'icon' => 'fas fa-fw fa-quote-left',
+    ],
+],
+],      
         /*[
             'text' => 'change_password',
             'url'  => 'admin/settings',

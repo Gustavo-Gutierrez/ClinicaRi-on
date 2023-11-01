@@ -8,6 +8,7 @@ use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\HistorialController;
 
 
 use App\Http\Controllers\HomeController;
@@ -79,4 +80,4 @@ Route::post('/consultas', [ConsultaController::class, 'store'])->name('consultas
 Route::post('/speech_to_text', [App\Http\Controllers\HomeController::class, 'speechToText'])->name('speech_to_text');
 
 Route::get('/cargar_excel', [App\Http\Controllers\ExcelController::class, 'cargarExcel']);
-
+Route::get('/historial/edit', [App\Http\Controllers\HistorialController::class, 'edit'])->name('historial.edit');

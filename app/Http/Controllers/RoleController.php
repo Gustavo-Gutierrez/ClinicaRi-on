@@ -14,6 +14,8 @@ date_default_timezone_set('America/La_Paz');
 class RoleController extends Controller
 {
 
+
+    
     public function index()
     {
         //$users = Persona::where('tipoe', 1)->paginate(10);
