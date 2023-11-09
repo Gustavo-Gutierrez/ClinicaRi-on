@@ -47,7 +47,7 @@ class PacienteController extends Controller
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
             'tipo' => 'Paciente',
-            'rolID'=> 1,
+
         ]);
 
         Paciente::create([

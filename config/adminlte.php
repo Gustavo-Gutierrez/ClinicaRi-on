@@ -340,11 +340,17 @@ return [
                 'icon' => 'fas fa-fw fa-user',
                 'submenu' =>[
                     [
+                        'text' => 'Administrativo',
+                        'url' => '/administrativos',
+                        'icon' => 'fas fa-fw fa-user',
+                    ],
+                    [
                         
                         'text' => 'Permisos',
                         'url'  => '/admin/roles',
                         'icon' => 'fas fa-fw fa-quote-left',
                     ],
+      
                 ],
                 
             ],

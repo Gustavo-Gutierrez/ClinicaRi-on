@@ -41,7 +41,7 @@ floatingButtonss.addEventListener('mouseleave', () => { // Corregido: 'mouseleav
 //************************************************************************************************ */
  // Obtén una lista de todos los campos de entrada del formulario
  const formFields = document.querySelectorAll('.custom-form input, .custom-form select, .custom-form textarea');
-
+ const context = new AudioContext();
  // Variable para realizar un seguimiento del índice del campo actual
  let currentIndex = 0;
 
@@ -63,6 +63,7 @@ floatingButtonss.addEventListener('mouseleave', () => { // Corregido: 'mouseleav
                  speak('Por favor, ingrese sus datos');
              }
      }
+
  }
 
  // Función para llenar el campo actual con el valor proporcionado
@@ -75,6 +76,10 @@ floatingButtonss.addEventListener('mouseleave', () => { // Corregido: 'mouseleav
  recognition.lang = 'es-ES'; // Establece el idioma adecuado
 
  let firstTime = true; // Variable para realizar un seguimiento de la primera vez
+ let listening = false;
+ recognition.maxDuration = 15000; // Límite de 5 segundos
+
+
 
  textSpeechButton.addEventListener('click', () => {
      if (firstTime) {
@@ -96,16 +101,17 @@ floatingButtonss.addEventListener('mouseleave', () => { // Corregido: 'mouseleav
 
          // Inicia el reconocimiento después de un breve retraso para dar tiempo al mensaje
          setTimeout(() => {
-             recognition.start(); // Inicia el reconocimiento
+            recognition.start(context.currentTime + 1, 3, 10) // Inicia el reconocimiento
          }, 2000); // Espera 2 segundos antes de iniciar el reconocimiento
      } else {
          // Si no es la primera vez, inicia el reconocimiento de inmediato
-         recognition.start(); // Inicia el reconocimiento
+         recognition.start(context.currentTime + 1, 3, 10) // Inicia el reconocimiento
      }
  });
 
  // Escucha el habla del usuario
  recognition.onresult = function (event) {
+  
      const transcript = event.results[0][0].transcript;
      // Divide la transcripción en palabras para interpretar el campo y el valor
      const words = transcript.toLowerCase().split(' ');
@@ -127,9 +133,15 @@ floatingButtonss.addEventListener('mouseleave', () => { // Corregido: 'mouseleav
              }
 
              fillCurrentField(value); // Llena el campo actual con el valor
-
+             recognition.stop(context.currentTime + 1) // Inicia el reconocimiento
              focusNextField(); // Mueve el foco al siguiente campo
+ 
          }
+         if (fieldName === 'silencio') {
+           
+            recognition.stop(context.currentTime + 1)
+          }
+        
      }
  };
 
