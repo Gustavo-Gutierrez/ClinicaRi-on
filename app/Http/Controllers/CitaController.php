@@ -2,56 +2,108 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Cita;
-use App\Models\Doctor;
-use App\Models\Paciente;
+use Illuminate\Http\Request;
 
+/**
+ * Class CitaController
+ * @package App\Http\Controllers
+ */
 class CitaController extends Controller
 {
-    public function create()
-    {
-        $pacientes = Paciente::with('user')->get();
-        
-        $doctors = Doctor::with('user')->get();
-
-        return view('citas.create', compact('pacientes', 'doctors'));
-    }
-    // Almacenar una nueva cita en la base de datos
-    public function store(Request $request)
-    {
-        // Validar los datos del formulario
-        $request->validate([
-            'paciente_id' => 'required|exists:pacientes,usuario_id',
-            'doctor_id' => 'required|exists:doctors,usuario_id',
-            'motivo' => 'required|string|max:255',
-            'fecha' => 'required|date',
-            'hora' => 'required|date_format:H:i',
-        ]);
-    
-        // Crear una nueva cita usando las relaciones de Eloquent
-        Cita::create([
-            'paciente_id' => $request->input('paciente_id'),
-            'doctor_id' => $request->input('doctor_id'),
-            'motivo' => $request->input('motivo'),
-            'fecha' => $request->input('fecha'),
-            'hora' => $request->input('hora'),
-        ]);
-    
-        // Redirigir a la lista de citas con un mensaje de éxito
-        return redirect()->route('citas.index')->with('success', 'Cita registrada correctamente');
-    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $citas = Cita::all();
-        return view('citas.index', compact('citas'));
+        $citas = Cita::paginate();
+
+        return view('cita.index', compact('citas'))
+            ->with('i', (request()->input('page', 1) - 1) * $citas->perPage());
     }
 
-    public function buscarPacientes(Request $request)
-{
-    $query = $request->input('query');
-    $pacientes = Paciente::where('nombre', 'like', '%' . $query . '%')->get();
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $cita = new Cita();
+        return view('cita.create', compact('cita'));
+    }
 
-    return response()->json($pacientes);
-}
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        request()->validate(Cita::$rules);
+
+        $cita = Cita::create($request->all());
+
+        return redirect()->route('citas.index')
+            ->with('success', 'Cita created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $cita = Cita::find($id);
+
+        return view('cita.show', compact('cita'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $cita = Cita::find($id);
+
+        return view('cita.edit', compact('cita'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  Cita $cita
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Cita $cita)
+    {
+        request()->validate(Cita::$rules);
+
+        $cita->update($request->all());
+
+        return redirect()->route('citas.index')
+            ->with('success', 'Cita updated successfully');
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy($id)
+    {
+        $cita = Cita::find($id)->delete();
+
+        return redirect()->route('citas.index')
+            ->with('success', 'Cita deleted successfully');
+    }
 }

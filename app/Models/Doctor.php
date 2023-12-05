@@ -1,20 +1,62 @@
 <?php
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Doctor
+ *
+ * @property $Arfecha_titulo
+ * @property $EspecialidadID
+ * @property $id
+ *
+ * @property Especialidad $especialidad
+ * @property Turno[] $turnos
+ * @property User $user
+ * @package App
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ */
 class Doctor extends Model
 {
-    use HasFactory;
+    
+    static $rules = [
+		'EspecialidadID' => 'required',
+    ];
 
-    protected $primaryKey = 'usuario_id'; // Indica que 'usuario_id' es la clave primaria de este modelo
-    public $incrementing = false; // Indica que 'usuario_id' no se incrementa automáticamente
+    protected $perPage = 20;
 
-    protected $fillable = ['usuario_id', 'especialidad']; // Especifica los atributos que se pueden llenar de forma masiva
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['Arfecha_titulo','EspecialidadID'];
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function especialidad()
+    {
+        return $this->hasOne('App\Models\Especialidad', 'id', 'EspecialidadID');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function turnos()
+    {
+        return $this->hasMany('App\Models\Turno', 'DoctorID', 'id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function user()
     {
-        return $this->belongsTo(User::class, 'usuario_id'); // User es el modelo predeterminado de usuario en Laravel
+        return $this->hasOne('App\Models\User', 'id', 'id');
     }
+    
+
 }

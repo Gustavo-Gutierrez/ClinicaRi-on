@@ -65,6 +65,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
+            'id'=>User::latest()->first()->id + 1, // Incrementing the last user's ID
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),

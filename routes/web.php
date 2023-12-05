@@ -7,8 +7,11 @@ use App\Http\Controllers\AdministrativoController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\ConsultaController;
+use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HistorialController;
 
 use App\Http\Controllers\HomeController;
 /*
@@ -99,3 +102,20 @@ Route::post('/speech_to_text', [App\Http\Controllers\HomeController::class, 'spe
 
 Route::get('/cargar_excel', [App\Http\Controllers\ExcelController::class, 'cargarExcel']);
 Route::get('/historial/edit', [App\Http\Controllers\HistorialController::class, 'edit'])->name('historial.edit');
+
+
+
+/*****GENERADO PARA LOS CRUDS****/
+
+Route::resource('equipos', EquipoController::class);
+Route::resource('doctors', DoctorController::class);
+Route::resource('administrativos', AdministrativoController::class);
+Route::resource('pacientes', PacienteController::class);
+Route::resource('citas', CitaController::class);
+Route::resource('consultas', ConsultaController::class);
+Route::resource('roles', RoleController::class);
+Route::resource('historials', HistorialController::class);
+Route::resource('especialidads', EspecialidadController::class);
+
+
+

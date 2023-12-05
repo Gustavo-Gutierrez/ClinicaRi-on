@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 <!-- Agregar estos enlaces en tu archivo HTML -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable@9.0.1/dist/handsontable.full.min.css">
 <script src="https://cdn.jsdelivr.net/npm/handsontable@9.0.1/dist/handsontable.full.min.js"></script>

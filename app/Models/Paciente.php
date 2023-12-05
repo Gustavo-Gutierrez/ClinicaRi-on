@@ -2,29 +2,87 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
 
+/**
+ * Class Paciente
+ *
+ * @property $Ci
+ * @property $Direccion
+ * @property $Email
+ * @property $Estado_civil
+ * @property $Fecha_nacimiento
+ * @property $Lugar_nacimiento
+ * @property $Nacionalidad
+ * @property $Nombre
+ * @property $Profesion
+ * @property $Telefono
+ * @property $id
+ * @property $HistorialID
+ *
+ * @property Cirujia[] $cirujias
+ * @property Cita[] $citas
+ * @property Consulta[] $consultas
+ * @property Historial[] $historials
+ * @property Servicio[] $servicios
+ * @package App
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ */
 class Paciente extends Model
 {
-    use HasFactory;
-    protected $primaryKey = 'usuario_id'; // Indica que 'usuario_id' es la clave primaria de este modelo
-    public $incrementing = false; // Indica que 'usuario_id' no se incrementa automáticamente
+    
+    static $rules = [
+    ];
 
-    protected $fillable = [
-    'usuario_id',  
-    'estado_civil',
-    'lugar_nacimiento',
-    'nacionalidad',
-    'profesion',
-    'raza',
-    'residencia_actual',
-    'grupo_sanguineo_abo',]; // Especifica los atributos que se pueden llenar de forma masiva
+    protected $perPage = 20;
 
-    public function user()
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['Ci','Direccion','Email','Estado_civil','Fecha_nacimiento','Lugar_nacimiento','Nacionalidad','Nombre','Profesion','Telefono','HistorialID'];
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cirujias()
     {
-        return $this->belongsTo(User::class, 'usuario_id'); // User es el modelo predeterminado de usuario en Laravel
+        return $this->hasMany('App\Models\Cirujia', 'PacienteID', 'id');
     }
     
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function citas()
+    {
+        return $this->hasMany('App\Models\Cita', 'PacienteID', 'id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function consultas()
+    {
+        return $this->hasMany('App\Models\Consulta', 'PacienteID', 'id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function historials()
+    {
+        return $this->hasMany('App\Models\Historial', 'PacienteID', 'id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function servicios()
+    {
+        return $this->hasMany('App\Models\Servicio', 'PacienteID', 'id');
+    }
+    
+
 }

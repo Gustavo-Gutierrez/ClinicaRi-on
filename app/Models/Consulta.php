@@ -2,30 +2,69 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Consulta
+ *
+ * @property $Diagnostico
+ * @property $Fechahora
+ * @property $Instrucciones
+ * @property $Motivo
+ * @property $Observacion
+ * @property $id
+ * @property $CitaID
+ * @property $PacienteID
+ * @property $DoctorID
+ *
+ * @property Cita $cita
+ * @property HistorialClinico[] $historialClinicos
+ * @property Paciente $paciente
+ * @package App
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ */
 class Consulta extends Model
 {
-    use HasFactory;
-    protected $fillable = [
-        'doctor_id',
-        'paciente_id',
-        'diagnotico',
-        'fecha',
-        'hora',
-        'instrucciones',
-        'motivo',
-        'observacion',
+    
+    static $rules = [
+		'CitaID' => 'required',
+		'PacienteID' => 'required',
+		'DoctorID' => 'required',
     ];
 
-    public function doctor()
-    {
-        return $this->belongsTo(Doctor::class, 'doctor_id', 'usuario_id');
-    }
+    protected $perPage = 20;
 
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['Diagnostico','Fechahora','Instrucciones','Motivo','Observacion','CitaID','PacienteID','DoctorID'];
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function cita()
+    {
+        return $this->hasOne('App\Models\Cita', 'id', 'CitaID');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function historialClinicos()
+    {
+        return $this->hasMany('App\Models\HistorialClinico', 'ConsultaID', 'id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function paciente()
     {
-        return $this->belongsTo(Paciente::class, 'paciente_id', 'usuario_id');
+        return $this->hasOne('App\Models\Paciente', 'id', 'PacienteID');
     }
+    
+
 }

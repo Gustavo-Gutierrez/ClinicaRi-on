@@ -2,84 +2,108 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Consulta;
-use App\Models\Doctor;
-use App\Models\Paciente;
+use Illuminate\Http\Request;
 
-
+/**
+ * Class ConsultaController
+ * @package App\Http\Controllers
+ */
 class ConsultaController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $consultas = Consulta::with('doctor', 'paciente')->get();
-        return view('consultas.index', compact('consultas'));
+        $consultas = Consulta::paginate();
+
+        return view('consulta.index', compact('consultas'))
+            ->with('i', (request()->input('page', 1) - 1) * $consultas->perPage());
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        
-        $doctores = Doctor::all();
-        $pacientes = Paciente::all();
-        return view('consultas.create', compact('doctores', 'pacientes'));
+        $consulta = new Consulta();
+        return view('consulta.create', compact('consulta'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        $request->validate([
-            'doctor_id' => 'required|exists:doctors,usuario_id',
-            'paciente_id' => 'required|exists:pacientes,usuario_id',
-            'diagnostico' => 'required|string|max:255',
-            'fecha' => 'required|date',
-            'hora' => 'required|date_format:H:i',
-            'instrucciones' => 'required|string|max:255',
-            'motivo' => 'required|string|max:255',
-            'observacion' => 'nullable|string|max:255',
-        ]);
+        request()->validate(Consulta::$rules);
 
-        Consulta::create([
-            'paciente_id' => $request->input('paciente_id'),
-            'doctor_id' => $request->input('doctor_id'),
-            'diagnotico' => $request->input('diagnostico'),
-            'fecha' => $request->input('fecha'),
-            'hora' => $request->input('hora'),
-            'instrucciones' => $request->input('instrucciones'),
-            'motivo' => $request->input('motivo'),
-            'observacion' => $request->input('observacion'), 
-        ]);
+        $consulta = Consulta::create($request->all());
 
-        return redirect()->route('consultas.index')->with('success', 'Consulta registrada correctamente');
+        return redirect()->route('consultas.index')
+            ->with('success', 'Consulta created successfully.');
     }
 
-    public function edit(Consulta $consulta)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-        $doctores = Doctor::all();
-        $pacientes = Paciente::all();
-        return view('consultas.edit', compact('consulta', 'doctores', 'pacientes'));
+        $consulta = Consulta::find($id);
+
+        return view('consulta.show', compact('consulta'));
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $consulta = Consulta::find($id);
+
+        return view('consulta.edit', compact('consulta'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  Consulta $consulta
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, Consulta $consulta)
     {
-        $request->validate([
-            'doctor_id' => 'required|exists:doctors,usuario_id',
-            'paciente_id' => 'required|exists:pacientes,usuario_id',
-            'diagnostico' => 'required|string|max:255',
-            'fecha' => 'required|date',
-            'hora' => 'required|date_format:H:i',
-            'instrucciones' => 'required|string|max:255',
-            'motivo' => 'required|string|max:255',
-            'observacion' => 'nullable|string|max:255',
-        ]);
+        request()->validate(Consulta::$rules);
 
         $consulta->update($request->all());
 
-        return redirect()->route('consultas.index')->with('success', 'Consulta actualizada correctamente');
+        return redirect()->route('consultas.index')
+            ->with('success', 'Consulta updated successfully');
     }
 
-    public function destroy(Consulta $consulta)
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy($id)
     {
-        $consulta->delete();
+        $consulta = Consulta::find($id)->delete();
 
-        return redirect()->route('consultas.index')->with('success', 'Consulta eliminada correctamente');
+        return redirect()->route('consultas.index')
+            ->with('success', 'Consulta deleted successfully');
     }
 }

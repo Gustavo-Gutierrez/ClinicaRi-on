@@ -2,68 +2,108 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Historial;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Storage;
-use Google\Cloud\Speech\V1\SpeechClient;
-
+/**
+ * Class HistorialController
+ * @package App\Http\Controllers
+ */
 class HistorialController extends Controller
 {
-     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
-     * Show the application dashboard.
+     * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('historial/index');
+        $historials = Historial::paginate();
+
+        return view('historial.index', compact('historials'))
+            ->with('i', (request()->input('page', 1) - 1) * $historials->perPage());
     }
-    public function edit()
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        return view('historial/edit');
+        $historial = new Historial();
+        return view('historial.create', compact('historial'));
     }
-    public function transcribeAudio(Request $request)
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        // Valida que se haya enviado un archivo de audio
-        if ($request->hasFile('audio_file')) {
-            $audioFile = $request->file('audio_file');
-            $filePath = $audioFile->getRealPath();
+        request()->validate(Historial::$rules);
 
-            // Configura el cliente de Google Cloud Speech-to-Text
-            $speechClient = new SpeechClient([
-                'credentials' => storage_path('google-credentials/myapp-386023-29ff015714a8.json'), // Ruta a tus credenciales
-            ]);
+        $historial = Historial::create($request->all());
 
-            // Realiza la transcripción del audio
-            $config = [
-                'encoding' => 'LINEAR16',
-                'sampleRateHertz' => 16000,
-                'languageCode' => 'es-ES', // Cambia el código de idioma según tus necesidades
-            ];
+        return redirect()->route('historials.index')
+            ->with('success', 'Historial created successfully.');
+    }
 
-            $audio = ['uri' => $filePath];
-            $response = $speechClient->recognize($config, $audio);
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $historial = Historial::find($id);
 
-            // Obtiene los resultados de la transcripción
-            $transcriptions = [];
-            foreach ($response->getResults() as $result) {
-                $transcriptions[] = $result->getAlternatives()[0]->getTranscript();
-            }
+        return view('historial.show', compact('historial'));
+    }
 
-            // Devuelve la transcripción como JSON
-            return response()->json(['transcripciones' => $transcriptions]);
-        } else {
-            return response()->json(['error' => 'No se envió un archivo de audio válido.']);
-        }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $historial = Historial::find($id);
+
+        return view('historial.edit', compact('historial'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  Historial $historial
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Historial $historial)
+    {
+        request()->validate(Historial::$rules);
+
+        $historial->update($request->all());
+
+        return redirect()->route('historials.index')
+            ->with('success', 'Historial updated successfully');
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy($id)
+    {
+        $historial = Historial::find($id)->delete();
+
+        return redirect()->route('historials.index')
+            ->with('success', 'Historial deleted successfully');
     }
 }
