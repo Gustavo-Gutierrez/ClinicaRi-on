@@ -43,6 +43,7 @@
         </tbody>
         <a href="{{ route('citas.create') }}" class="btn btn-primary">Crear Cita</a>
         </table>
+        <a href="{{ route('consultas.create') }}" class="btn btn-primary">Crear Consulta</a>
     </div>
     
 @endsection
