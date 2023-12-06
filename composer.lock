@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c692bded6ec5e063ccb189434856d241",
+    "content-hash": "ff8b407afd161803c7ffd8525401a3b4",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -138,13 +138,13 @@
             "description": "Arbitrary-precision arithmetic library",
             "keywords": [
                 "Arbitrary-precision",
-                "unsignedBigInteger",
                 "BigRational",
                 "arithmetic",
                 "bigdecimal",
                 "bignum",
                 "brick",
-                "math"
+                "math",
+                "unsignedBigInteger"
             ],
             "support": {
                 "issues": "https://github.com/brick/math/issues",
@@ -983,6 +983,63 @@
                 "source": "https://github.com/googleapis/google-cloud-php-speech/tree/v1.14.3"
             },
             "time": "2023-10-16T22:54:31+00:00"
+        },
+        {
+            "name": "google/cloud-vision",
+            "version": "v1.7.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/googleapis/google-cloud-php-vision.git",
+                "reference": "ff6a0fb22b5cfe0954165f3d149483fe46ff059e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/ff6a0fb22b5cfe0954165f3d149483fe46ff059e",
+                "reference": "ff6a0fb22b5cfe0954165f3d149483fe46ff059e",
+                "shasum": ""
+            },
+            "require": {
+                "google/cloud-core": "^1.52.7",
+                "google/gax": "^1.24.0",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "erusev/parsedown": "^1.6",
+                "google/cloud-storage": "^1.12",
+                "phpdocumentor/reflection": "^5.0",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.0",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "suggest": {
+                "ext-grpc": "The gRPC extension enables use of the performant gRPC transport",
+                "ext-protobuf": "Provides a significant increase in throughput over the pure PHP protobuf implementation. See https://cloud.google.com/php/grpc for installation instructions.",
+                "google/cloud-storage": "Annotate images stored in Google Cloud Storage"
+            },
+            "type": "library",
+            "extra": {
+                "component": {
+                    "id": "cloud-vision",
+                    "target": "googleapis/google-cloud-php-vision.git",
+                    "path": "Vision",
+                    "entry": "src/VisionClient.php"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Google\\Cloud\\Vision\\": "src",
+                    "GPBMetadata\\Google\\Cloud\\Vision\\": "metadata"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Cloud Vision Client for PHP",
+            "support": {
+                "source": "https://github.com/googleapis/google-cloud-php-vision/tree/v1.7.6"
+            },
+            "time": "2023-11-02T19:15:44+00:00"
         },
         {
             "name": "google/common-protos",
@@ -10199,5 +10256,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
