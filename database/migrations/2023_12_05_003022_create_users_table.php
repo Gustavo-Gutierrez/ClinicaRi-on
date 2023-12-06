@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('Ci')->nullable();
             $table->string('Direccion', 255)->nullable();
             $table->string('email')->unique();
-            $table->time('Fecha_nacimiento')->nullable();
+            $table->dateTime('Fecha_nacimiento')->nullable();
             $table->string('name', 255)->nullable();
             $table->string('Profesion', 255)->nullable();
             $table->char('Sexo', 1)->nullable();
@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            
         });
     }
 

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('Profesion', 255)->nullable();
             $table->integer('Telefono')->nullable();
             $table->id();
-            $table->unsignedBigInteger('HistorialID')->nullable();
+            
         });
     }
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Servicio
  *
- * @property $Feha_hora
+ * @property $Fecha_hora
  * @property $Nombre
  * @property $Total
  * @property $id

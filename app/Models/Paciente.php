@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property $Profesion
  * @property $Telefono
  * @property $id
- * @property $HistorialID
  *
  * @property Cirujia[] $cirujias
  * @property Cita[] $citas
@@ -41,7 +40,7 @@ class Paciente extends Model
      *
      * @var array
      */
-    protected $fillable = ['Ci','Direccion','Email','Estado_civil','Fecha_nacimiento','Lugar_nacimiento','Nacionalidad','Nombre','Profesion','Telefono','HistorialID'];
+    protected $fillable = ['Ci','Direccion','Email','Estado_civil','Fecha_nacimiento','Lugar_nacimiento','Nacionalidad','Nombre','Profesion','Telefono'];
 
 
     /**

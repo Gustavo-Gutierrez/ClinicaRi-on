@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('doctors', function (Blueprint $table) {     $table->timestamps();
-            $table->dateTime('Arfecha_titulo')->nullable();
+            $table->dateTime('fecha_titulo')->nullable();
             $table->unsignedBigInteger('EspecialidadID')->index('FK_Doctor_Especialidad');
             $table->id();
         });
