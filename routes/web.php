@@ -14,10 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HistorialController;
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\HorarioController;
-use App\Http\Controllers\TurnoController;
-use App\Http\Controllers\TurnoHorarioController;
-
+//controlador de la IA de reconocimiento de imagen
+use App\Http\Controllers\OCRController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,10 +28,17 @@ use App\Http\Controllers\TurnoHorarioController;
 */
 
 Route::get('/', function () {
-    return view('vendor.adminlte.auth.login');
+    return view('welcome');
 });
 
+Route::get('/login', function () {
+    return view('vendor.adminlte.auth.login');
+});
+Route::get('/register', function () {
+    return view('vendor.adminlte.auth.register');
+});
 Auth::routes();
+
 Route::prefix('/admin')->group(function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::get('/roles', [App\Http\Controllers\RoleController::class, 'index'])
@@ -125,5 +130,7 @@ Route::resource('turnos', TurnoController::class);
 Route::resource('turno_horarios', TurnoHorarioController::class);
 
 
-
+//rutas de la IA de reconocimiento de imagen
+Route::post('imageOCR', [OCRController::class, 'imageOCR'])->name('imageOCR');
+Route::get('archivo', [OCRController::class, 'index'])->name('index');
 

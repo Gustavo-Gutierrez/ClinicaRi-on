@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property $Profesion
  * @property $Telefono
  * @property $id
-
  *
  * @property Cirujia[] $cirujias
  * @property Cita[] $citas

@@ -8,6 +8,7 @@
         "php": "^8.1",
         "brackets/craftable-installer": "^2.2",
         "google/cloud-speech": "^1.14",
+        "google/cloud-vision": "^1.7",
         "guzzlehttp/guzzle": "^7.2",
         "jeroennoten/laravel-adminlte": "^3.9",
         "laravel/framework": "^10.10",

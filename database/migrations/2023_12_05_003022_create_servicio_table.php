@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('servicios', function (Blueprint $table) {     $table->timestamps();
-            $table->timestamp('Feha_hora')->nullable();
+            $table->timestamp('Fecha_hora')->nullable();
             $table->string('Nombre', 255)->nullable();
             $table->double('Total', 10, 2)->nullable();
             $table->id();

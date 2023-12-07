@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('Altura', 55)->nullable();
             $table->string('Ant_familiar', 255)->nullable();
             $table->string('Ant_personal', 255)->nullable();
-            $table->char('Grupo_sanguineo', 2)->nullable();
+            $table->char('Grupo_sanguineo', 3)->nullable();
             $table->string('Raza', 55)->nullable();
             $table->char('Sexo', 1)->nullable();
             $table->id();
