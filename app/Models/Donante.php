@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Transplante
+ * Class Donante
  *
  * @property $created_at
  * @property $updated_at
- * @property $Nombre
- * @property $Valor
+ * @property $Causa_obito
+ * @property $Hla
+ * @property $Lista_problemas
+ * @property $Tipo
  * @property $id
  * @property $Historial_cirujiaID
  *
@@ -18,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Transplante extends Model
+class Donante extends Model
 {
     
     static $rules = [
@@ -32,7 +34,7 @@ class Transplante extends Model
      *
      * @var array
      */
-    protected $fillable = ['Nombre','Valor','Historial_cirujiaID'];
+    protected $fillable = ['Causa_obito','Hla','Lista_problemas','Tipo','Historial_cirujiaID'];
 
 
     /**

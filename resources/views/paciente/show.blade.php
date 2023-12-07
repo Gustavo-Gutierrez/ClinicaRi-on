@@ -60,10 +60,6 @@
                             <strong>Telefono:</strong>
                             {{ $paciente->Telefono }}
                         </div>
-                        <div class="form-group">
-                            <strong>Historialid:</strong>
-                            {{ $paciente->HistorialID }}
-                        </div>
 
                     </div>
                 </div>

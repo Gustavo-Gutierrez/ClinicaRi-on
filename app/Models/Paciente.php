@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Paciente
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $Ci
  * @property $Direccion
  * @property $Email

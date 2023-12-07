@@ -2,9 +2,9 @@
     <div class="box-body">
         
         <div class="form-group">
-            {{ Form::label('Arfecha_titulo') }}
-            {{ Form::date('Arfecha_titulo', $doctor->Arfecha_titulo, ['class' => 'form-control' . ($errors->has('Arfecha_titulo') ? ' is-invalid' : ''), 'placeholder' => 'Arfecha Titulo']) }}
-            {!! $errors->first('Arfecha_titulo', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('fecha_titulo') }}
+            {{ Form::date('Fecha_titulo', $doctor->fecha_titulo, ['class' => 'form-control' . ($errors->has('fecha_titulo') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Titulo']) }}
+            {!! $errors->first('fecha_titulo', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('EspecialidadID') }}

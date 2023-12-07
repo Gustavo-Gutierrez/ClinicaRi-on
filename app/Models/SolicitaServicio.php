@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class SolicitaServicio
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $ServicioID
  * @property $CitaID
  *
- * @property Citum $citum
+ * @property Cita $cita
  * @property Servicio $servicio
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
@@ -36,9 +38,9 @@ class SolicitaServicio extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function citum()
+    public function cita()
     {
-        return $this->hasOne('App\Models\Citum', 'CitaID', 'CitaID');
+        return $this->hasOne('App\Models\Cita', 'id', 'CitaID');
     }
     
     /**
@@ -46,7 +48,7 @@ class SolicitaServicio extends Model
      */
     public function servicio()
     {
-        return $this->hasOne('App\Models\Servicio', 'ServicioID', 'ServicioID');
+        return $this->hasOne('App\Models\Servicio', 'id', 'ServicioID');
     }
     
 

@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property $Precio
  * @property $id
  * @property $TipoID
+ * @property $created_at
+ * @property $updated_at
  *
  * @property ServAnalisi[] $servAnalises
  * @property Tipo $tipo

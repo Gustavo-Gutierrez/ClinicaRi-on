@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class HistorialClinico
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $Enf_actual
  * @property $Fecha_hora
  * @property $Hip_diagnostico

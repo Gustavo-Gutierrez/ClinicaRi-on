@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Consulta
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $Diagnostico
  * @property $Fechahora
  * @property $Instrucciones

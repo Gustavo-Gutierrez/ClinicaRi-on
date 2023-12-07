@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Cirujia
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $Fecha_hora
  * @property $Sala
  * @property $id

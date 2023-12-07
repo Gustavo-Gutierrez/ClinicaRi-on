@@ -1,21 +1,60 @@
 <?php
 
+
+use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ChatbotController;
-use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AdministrativoController;
-use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\AnalisiController;
+use App\Http\Controllers\AnlisisController;
+use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\CirujiaController;
+use App\Http\Controllers\CirujiumController;
 use App\Http\Controllers\CitaController;
+use App\Http\Controllers\CitumController;
 use App\Http\Controllers\ConsultaController;
+use App\Http\Controllers\ConsultumController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\EquipoCirijaController;
+use App\Http\Controllers\EquipoCirujiumController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\EspecialidadController;
-use App\Http\Controllers\RoleController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\FacturaController;
+use App\Http\Controllers\FailedjobController;
+use App\Http\Controllers\HistorialCirujiaController;
+use App\Http\Controllers\HistorialCirujiaRgistroController;
+use App\Http\Controllers\HistorialCirujiumController;
+use App\Http\Controllers\HistorialClinicoController;
 use App\Http\Controllers\HistorialController;
-
 use App\Http\Controllers\HomeController;
-//controlador de la IA de reconocimiento de imagen
-use App\Http\Controllers\OCRController;
+use App\Http\Controllers\HorarioController;
+use App\Http\Controllers\IndicadeshcirujiaController;
+use App\Http\Controllers\IndicadeshcirujiumController;
+use App\Http\Controllers\IndicadorhclinicoController;
+use App\Http\Controllers\MedicamentoController;
+use App\Http\Controllers\OCRController; //controlador de la IA de reconocimiento de imagen
+use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\PersonalController;
+use App\Http\Controllers\RecetaController;
+use App\Http\Controllers\RecetumController;
+use App\Http\Controllers\ResultadoController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ServAnalisiController;
+use App\Http\Controllers\ServicioController;
+use App\Http\Controllers\SolicitaServicioController;
+use App\Http\Controllers\TipoController;
+use App\Http\Controllers\TipoIndController;
+use App\Http\Controllers\TransplanteController;
+use App\Http\Controllers\TratamientoshcirController;
+use App\Http\Controllers\TratamientoshcliController;
+use App\Http\Controllers\TurnoController;
+use App\Http\Controllers\TurnoHorarioController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\IndicadoreshcirujiaController;
+use App\Http\Controllers\ReportController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -112,21 +151,62 @@ Route::post('/speech_to_text', [App\Http\Controllers\HomeController::class, 'spe
 Route::get('/cargar_excel', [App\Http\Controllers\ExcelController::class, 'cargarExcel']);
 Route::get('/historial/edit', [App\Http\Controllers\HistorialController::class, 'edit'])->name('historial.edit');
 
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
 
 
-/*****GENERADO PARA LOS CRUDS****/
-
-Route::resource('equipos', EquipoController::class);
-Route::resource('doctors', DoctorController::class);
+/**GENERADO PARA LOS CRUDS*/
 Route::resource('administrativos', AdministrativoController::class);
-Route::resource('pacientes', PacienteController::class);
+Route::resource('anlisis', AnalisiController::class);
+Route::resource('chatbots', ChatbotController::class);
+Route::resource('cirujias', CirujiaController::class);
+Route::resource('cirujia', CirujiumController::class);
 Route::resource('citas', CitaController::class);
+Route::resource('citum', CitumController::class);
 Route::resource('consultas', ConsultaController::class);
-Route::resource('roles', RoleController::class);
-Route::resource('historials', HistorialController::class);
+Route::resource('consultum', ConsultumController::class);
+Route::resource('doctors', DoctorController::class);
+Route::resource('equipo_cirijas', EquipoCirujiumController::class);
+Route::resource('equipos', EquipoController::class);
 Route::resource('especialidads', EspecialidadController::class);
-
+Route::resource('excel', ExcelController::class);
+Route::resource('facturas', FacturaController::class);
+Route::resource('failedjobs', FailedjobController::class);
+Route::resource('historial_cirujias', HistorialCirujiaController::class);
+Route::resource('historial_cirujia_rgistros', HistorialCirujiaRgistroController::class);
+Route::resource('historial_cirujiums', HistorialCirujiumController::class);
+Route::resource('historial_clinicos', HistorialClinicoController::class);
+Route::resource('historials', HistorialController::class);
+Route::resource('home', HomeController::class);
+Route::resource('horarios', HorarioController::class);
+Route::resource('indicadeshcirujias', IndicadoreshcirujiaController::class);
+Route::resource('indicadorhclinicos', IndicadorhclinicoController::class);
+Route::resource('medicamentos', MedicamentoController::class);
 //rutas de la IA de reconocimiento de imagen
 Route::post('imageOCR', [OCRController::class, 'imageOCR'])->name('imageOCR');
 Route::get('archivo', [OCRController::class, 'index'])->name('index');
+Route::resource('pacientes', PacienteController::class);
+Route::resource('personals', PersonalController::class);
+Route::resource('recetas', RecetaController::class);
+Route::resource('recetum', RecetumController::class);
+Route::resource('resultados', ResultadoController::class);
+Route::resource('roles', RoleController::class);
+Route::resource('serv_analisis', ServAnalisiController::class);
+Route::resource('servicios', ServicioController::class);
+Route::resource('solicita_servicios', SolicitaServicioController::class);
+Route::resource('tipos', TipoController::class);
+Route::resource('tipo_inds', TipoIndController::class);
+Route::resource('transplantes', TransplanteController::class);
+Route::resource('tratamientoshclis', TratamientoshcliController::class);
+Route::resource('tratamientoshcirs', TratamientoshcirController::class);
+Route::resource('turnos', TurnoController::class);
+Route::resource('turno_horarios', TurnoHorarioController::class);
+Route::resource('users', UserController::class);
+
+Route::resource('indicadors', IndicadorhclinicoController::class);
+//rutas de la IA de reconocimiento de imagen
+Route::post('imageOCR', [OCRController::class, 'imageOCR'])->name('imageOCR');
+Route::get('archivo', [OCRController::class, 'index'])->name('index');
+
+Route::get('/generate-pdf', [ReportController::class, 'generatePDF']);
+Route::get('/generate-csv', [ReportController::class, 'generateCSV']);
 

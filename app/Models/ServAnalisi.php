@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class ServAnalisi
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $id
  * @property $ServicioID
  * @property $AnalisisID

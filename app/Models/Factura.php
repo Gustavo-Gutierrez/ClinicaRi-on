@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Factura
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $Ci
  * @property $Descuento
  * @property $Fecha_hora

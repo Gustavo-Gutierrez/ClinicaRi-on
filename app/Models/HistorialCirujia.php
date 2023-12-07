@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class HistorialCirujia
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $Fecha_hora
  * @property $id
  *
  * @property Donante[] $donantes
- * @property HistorialCirujiaRgistro[] $historialCirujiaRgistros
  * @property Historial $historial
+ * @property HistorialCirujiaRgistro[] $historialCirujiaRgistros
  * @property Indicadoreshcirujia[] $indicadoreshcirujias
  * @property Transplante[] $transplantes
  * @property Tratamientoshcir[] $tratamientoshcirs
@@ -44,19 +46,19 @@ class HistorialCirujia extends Model
     }
     
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function historialCirujiaRgistros()
-    {
-        return $this->hasMany('App\Models\HistorialCirujiaRgistro', 'Historial_cirujiaID', 'id');
-    }
-    
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function historial()
     {
         return $this->hasOne('App\Models\Historial', 'id', 'id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function historialCirujiaRgistros()
+    {
+        return $this->hasMany('App\Models\HistorialCirujiaRgistro', 'Historial_cirujiaID', 'id');
     }
     
     /**

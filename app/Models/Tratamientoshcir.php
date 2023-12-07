@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Tratamientoshcir
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $Descripcion
  * @property $Nombre
  * @property $id

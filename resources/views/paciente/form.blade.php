@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('Fecha_nacimiento') }}
-            {{ Form::date('fecha_nacimiento', $paciente->Fecha_nacimiento, ['class' => 'form-control' . ($errors->has('Fecha_nacimiento') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Nacimiento']) }}
+            {{ Form::date('Fecha_nacimiento', $paciente->Fecha_nacimiento, ['class' => 'form-control' . ($errors->has('Fecha_nacimiento') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Nacimiento']) }}
             {!! $errors->first('Fecha_nacimiento', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -50,11 +50,6 @@
             {{ Form::label('Telefono') }}
             {{ Form::text('Telefono', $paciente->Telefono, ['class' => 'form-control' . ($errors->has('Telefono') ? ' is-invalid' : ''), 'placeholder' => 'Telefono']) }}
             {!! $errors->first('Telefono', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('HistorialID') }}
-            {{ Form::text('HistorialID', $paciente->HistorialID, ['class' => 'form-control' . ($errors->has('HistorialID') ? ' is-invalid' : ''), 'placeholder' => 'Historialid']) }}
-            {!! $errors->first('HistorialID', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
     </div>

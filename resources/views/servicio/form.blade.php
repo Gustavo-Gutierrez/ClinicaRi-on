@@ -2,9 +2,9 @@
     <div class="box-body">
         
         <div class="form-group">
-            {{ Form::label('Feha_hora') }}
-            {{ Form::text('Feha_hora', $servicio->Feha_hora, ['class' => 'form-control' . ($errors->has('Feha_hora') ? ' is-invalid' : ''), 'placeholder' => 'Feha Hora']) }}
-            {!! $errors->first('Feha_hora', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('Fecha_hora') }}
+            {{ Form::date('Fecha_hora', $servicio->Fecha_hora, ['class' => 'form-control' . ($errors->has('Fecha_hora') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Hora']) }}
+            {!! $errors->first('Fecha_hora', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('Nombre') }}

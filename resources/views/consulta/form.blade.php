@@ -8,7 +8,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('Fechahora') }}
-            {{ Form::date('fechahora', $consulta->Fechahora, ['class' => 'form-control' . ($errors->has('Fechahora') ? ' is-invalid' : ''), 'placeholder' => 'Fechahora']) }}
+            {{ Form::date('Fechahora', $consulta->Fechahora, ['class' => 'form-control' . ($errors->has('Fechahora') ? ' is-invalid' : ''), 'placeholder' => 'Fechahora']) }}
             {!! $errors->first('Fechahora', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">

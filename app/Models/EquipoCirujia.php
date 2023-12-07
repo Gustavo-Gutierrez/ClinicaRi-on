@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class EquipoCirujia
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $EquipoID
  * @property $UsuarioID
  *

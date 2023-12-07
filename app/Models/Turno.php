@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Turno
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $Hora_fin
  * @property $Hora_inicio
  * @property $id

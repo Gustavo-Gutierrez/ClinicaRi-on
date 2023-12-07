@@ -36,7 +36,7 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Arfecha Titulo</th>
+										<th>Fecha Titulo</th>
 										<th>Especialidadid</th>
 
                                         <th></th>
@@ -47,7 +47,7 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $doctor->Arfecha_titulo }}</td>
+											<td>{{ $doctor->fecha_titulo }}</td>
 											<td>{{ $doctor->EspecialidadID }}</td>
 
                                             <td>

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Receta
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $Indicaciones
  * @property $id
  * @property $Historial_clinicoID

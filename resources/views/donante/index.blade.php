@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('template_title')
-    Servicio
+    Donante
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Servicio') }}
+                                {{ __('Donante') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('servicios.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('donantes.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -36,28 +36,30 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Fecha Hora</th>
-										<th>Nombre</th>
-										<th>Total</th>
-										<th>Pacienteid</th>
+										<th>Causa Obito</th>
+										<th>Hla</th>
+										<th>Lista Problemas</th>
+										<th>Tipo</th>
+										<th>Historial Cirujiaid</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($servicios as $servicio)
+                                    @foreach ($donantes as $donante)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $servicio->Fecha_hora }}</td>
-											<td>{{ $servicio->Nombre }}</td>
-											<td>{{ $servicio->Total }}</td>
-											<td>{{ $servicio->PacienteID }}</td>
+											<td>{{ $donante->Causa_obito }}</td>
+											<td>{{ $donante->Hla }}</td>
+											<td>{{ $donante->Lista_problemas }}</td>
+											<td>{{ $donante->Tipo }}</td>
+											<td>{{ $donante->Historial_cirujiaID }}</td>
 
                                             <td>
-                                                <form action="{{ route('servicios.destroy',$servicio->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('servicios.show',$servicio->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('servicios.edit',$servicio->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('donantes.destroy',$donante->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('donantes.show',$donante->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('donantes.edit',$donante->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -70,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $servicios->links() !!}
+                {!! $donantes->links() !!}
             </div>
         </div>
     </div>

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Indicadorhclinico
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $Nombre
  * @property $Valor
  * @property $id

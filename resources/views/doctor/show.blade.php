@@ -21,8 +21,8 @@
                     <div class="card-body">
                         
                         <div class="form-group">
-                            <strong>Arfecha Titulo:</strong>
-                            {{ $doctor->Arfecha_titulo }}
+                            <strong>Fecha Titulo:</strong>
+                            {{ $doctor->fecha_titulo }}
                         </div>
                         <div class="form-group">
                             <strong>Especialidadid:</strong>

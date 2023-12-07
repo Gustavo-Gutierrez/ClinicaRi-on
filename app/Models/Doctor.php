@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Doctor
  *
- * @property $Arfecha_titulo
+ * @property $created_at
+ * @property $updated_at
+ * @property $fecha_titulo
  * @property $EspecialidadID
  * @property $id
  *
@@ -31,7 +33,7 @@ class Doctor extends Model
      *
      * @var array
      */
-    protected $fillable = ['Arfecha_titulo','EspecialidadID'];
+    protected $fillable = ['fecha_titulo','EspecialidadID'];
 
 
     /**

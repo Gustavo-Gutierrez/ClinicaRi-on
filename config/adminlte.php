@@ -389,7 +389,24 @@ return [
         'icon' => 'fas fa-fw fa-quote-left',
     ],
 ],
-],      
+],  
+[
+    'text' => 'Reportes',
+    'icon' => 'fas fa-fw fa-user',
+    'submenu' => [
+    
+    [
+        'text' => 'Dashboard',
+        'url'  => '/dashboard',
+        'icon' => 'fas fa-fw fa-dashboard',
+    ],
+    [
+        'text' => 'Generar Reportes',
+        'url'  => '/reportes',
+        'icon' => 'fas fa-fw fa-quote-left',
+    ],
+],
+],    
         /*[
             'text' => 'change_password',
             'url'  => 'admin/settings',

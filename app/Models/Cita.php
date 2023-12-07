@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Cita
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $Fechahora
  * @property $id
  * @property $PacienteID

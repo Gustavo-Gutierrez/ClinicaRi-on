@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class HistorialCirujiaRgistro
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $Historial_cirujiaID
  * @property $CirujiaID
  *

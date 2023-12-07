@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Historial
  *
+ * @property $created_at
+ * @property $updated_at
  * @property $Altura
  * @property $Ant_familiar
  * @property $Ant_personal
