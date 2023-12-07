@@ -46,7 +46,7 @@
 										<th>Nombre</th>
 										<th>Profesion</th>
 										<th>Telefono</th>
-										<th>Historialid</th>
+				
 
                                         <th></th>
                                     </tr>
@@ -66,7 +66,7 @@
 											<td>{{ $paciente->Nombre }}</td>
 											<td>{{ $paciente->Profesion }}</td>
 											<td>{{ $paciente->Telefono }}</td>
-											<td>{{ $paciente->HistorialID }}</td>
+    
 
                                             <td>
                                                 <form action="{{ route('pacientes.destroy',$paciente->id) }}" method="POST">

@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HistorialController;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HorarioController;
+use App\Http\Controllers\TurnoController;
+use App\Http\Controllers\TurnoHorarioController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -116,6 +120,10 @@ Route::resource('consultas', ConsultaController::class);
 Route::resource('roles', RoleController::class);
 Route::resource('historials', HistorialController::class);
 Route::resource('especialidads', EspecialidadController::class);
+Route::resource('horarios', HorarioController::class);
+Route::resource('turnos', TurnoController::class);
+Route::resource('turno_horarios', TurnoHorarioController::class);
+
 
 
 
