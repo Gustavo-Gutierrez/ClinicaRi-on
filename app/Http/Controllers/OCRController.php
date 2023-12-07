@@ -95,13 +95,14 @@ class OCRController extends Controller
       
         
          $imageAnnotator->close();
-         $pricesFromDatabase = $this->getPricesFromDatabase($siWords);
-
+         
+         $totalCost = $this->getTotalCostFromDatabase($siWords);
          $result = $this->getPricesFromDatabase($siWords);
 
           
          return view('archivo.index', [
             'result' => $result,  // Paso el resultado como variable 'result'
+            'totalCost' => $totalCost,  // Paso el costo total como variable 'totalCost'
             'success' => 'Imagen subida correctamente',
         ]);
          }
@@ -122,7 +123,17 @@ class OCRController extends Controller
          
              return $result;
             } 
-
+            private function getTotalCostFromDatabase($siWords)
+            {
+                $totalCost = 0;
+                foreach ($siWords as $name) {
+                    $analysis = Analisi::where('Nombre', $name)->first();
+                    if ($analysis) {
+                        $totalCost += $analysis->Precio;
+                    }
+                }
+                return $totalCost;
+            }
 
 }
 

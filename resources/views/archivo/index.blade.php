@@ -143,6 +143,10 @@
                         <p>No hay resultados adicionales disponibles.</p>
                     @endif
                 </div>
+                 <!-- Mostrar el costo total -->
+             @if(isset($totalCost))
+            <p>Costo Total: ${{ $totalCost }}</p>
+        @endif
             </div>
         </div>
     </div>
