@@ -320,7 +320,9 @@ return [
         ],*/
         //['header' => 'account_settings'],
        // Este es el elemento que representa el menú deslizante
+        
     [
+
         'text' => 'Usuarios',
         'icon' => 'fas fa-fw fa-user',
         'submenu' => [
@@ -331,7 +333,7 @@ return [
             ],
             [
                 'text' => 'Doctor',
-                'url' => '/doctores1',
+                'url' => '/doctors',
                 'icon' => 'fas fa-fw fa-user',
             ],
             [
@@ -380,7 +382,7 @@ return [
     
     [
         'text' => 'Historial Clinico',
-        'url'  => '/historial/edit',
+        'url'  => '/historial_clinicos',
         'icon' => 'fas fa-fw fa-quote-left',
     ],
     [
@@ -398,7 +400,12 @@ return [
     [
         'text' => 'Dashboard',
         'url'  => '/dashboard',
-        'icon' => 'fas fa-fw fa-dashboard',
+        'icon' => 'fas fa-fw fa-laptop-code',
+    ],
+    [
+        'text' => 'Bitacora',
+        'url'  => '/bitacoras',
+        'icon' => 'fas fa-fw fa-laptop-code',
     ],
     [
         'text' => 'Generar Reportes',

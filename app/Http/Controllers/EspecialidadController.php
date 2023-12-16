@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Especialidad;
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use App\Models\Personal;
+use App\Models\Doctor;
+use App\Models\Bitacora;
+use Illuminate\Support\Facades\Auth;
 /**
  * Class EspecialidadController
  * @package App\Http\Controllers
@@ -43,10 +47,32 @@ class EspecialidadController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Especialidad::$rules);
+        //request()->validate(Especialidad::$rules);
 
         $especialidad = Especialidad::create($request->all());
+//Bitacora
+$id2 = Auth::id();
+$user = User::where('id', $id2)->first();
+$tipo = "default";
+$doctor =Doctor::where('id', $id2)->first();
+$personal =Personal::where('id', $id2)->first();
 
+if ($doctor && $doctor->id == $id2) {
+    $tipo = "Doctor";
+}
+
+if ($personal && $personal->id == $id2) {
+    $tipo = "Enfermera/ro";
+}
+$action = "Creó un registro nuevo en la tabla Especialidad";
+$bitacora = Bitacora::create();
+$bitacora->tipou = $tipo;
+$bitacora->name = $user->name;
+$bitacora->actividad = $action;
+$bitacora->fechaHora = date('Y-m-d H:i:s');
+$bitacora->ip = $request->ip();
+$bitacora->save();
+//----------
         return redirect()->route('especialidads.index')
             ->with('success', 'Especialidad created successfully.');
     }
@@ -86,10 +112,32 @@ class EspecialidadController extends Controller
      */
     public function update(Request $request, Especialidad $especialidad)
     {
-        request()->validate(Especialidad::$rules);
+        //request()->validate(Especialidad::$rules);
 
         $especialidad->update($request->all());
+//Bitacora
+$id2 = Auth::id();
+$user = User::where('id', $id2)->first();
+$tipo = "default";
+$doctor =Doctor::where('id', $id2)->first();
+$personal =Personal::where('id', $id2)->first();
 
+if ($doctor && $doctor->id == $id2) {
+    $tipo = "Doctor";
+}
+
+if ($personal && $personal->id == $id2) {
+    $tipo = "Enfermera/ro";
+}
+$action = "Edito un registro en la tabla Especialidad ";
+$bitacora = Bitacora::create();
+$bitacora->tipou = $tipo;
+$bitacora->name = $user->name;
+$bitacora->actividad = $action;
+$bitacora->fechaHora = date('Y-m-d H:i:s');
+$bitacora->ip = $request->ip();
+$bitacora->save();
+//----------
         return redirect()->route('especialidads.index')
             ->with('success', 'Especialidad updated successfully');
     }
@@ -102,7 +150,29 @@ class EspecialidadController extends Controller
     public function destroy($id)
     {
         $especialidad = Especialidad::find($id)->delete();
-
+        //Bitacora
+        $id2 = Auth::id();
+        $user = User::where('id', $id2)->first();
+        $tipo = "default";
+        $doctor =Doctor::where('id', $id2)->first();
+        $personal =Personal::where('id', $id2)->first();
+        
+        if ($doctor && $doctor->id == $id2) {
+            $tipo = "Doctor";
+        }
+        
+        if ($personal && $personal->id == $id2) {
+            $tipo = "Enfermera/ro";
+        }
+        $action = "Elimino un registro en la tabla Especialidad ";
+        $bitacora = Bitacora::create();
+        $bitacora->tipou = $tipo;
+        $bitacora->name = $user->name;
+        $bitacora->actividad = $action;
+        $bitacora->fechaHora = date('Y-m-d H:i:s');
+        $bitacora->ip = $request->ip();
+        $bitacora->save();
+        //----------
         return redirect()->route('especialidads.index')
             ->with('success', 'Especialidad deleted successfully');
     }

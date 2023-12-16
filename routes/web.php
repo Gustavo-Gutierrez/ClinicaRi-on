@@ -54,6 +54,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\IndicadoreshcirujiaController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\BitacoraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -209,4 +210,10 @@ Route::get('archivo', [OCRController::class, 'index'])->name('index');
 
 Route::get('/generate-pdf', [ReportController::class, 'generatePDF']);
 Route::get('/generate-csv', [ReportController::class, 'generateCSV']);
+
+// Ruta para mostrar el calendario
+Route::get('/calendario', [App\Http\Controllers\CitaController::class, 'calendario'])->name('calendario')->middleware('auth');
+
+//Bitacoras
+Route::resource('/bitacoras', BitacoraController::class);
 

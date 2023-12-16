@@ -7,10 +7,22 @@
             {!! $errors->first('fecha_titulo', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('EspecialidadID') }}
-            {{ Form::text('EspecialidadID', $doctor->EspecialidadID, ['class' => 'form-control' . ($errors->has('EspecialidadID') ? ' is-invalid' : ''), 'placeholder' => 'Especialidadid']) }}
-            {!! $errors->first('EspecialidadID', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+    {{ Form::label('especialidad_id', 'Especialidad') }}
+    <select class="form-control{{ $errors->has('especialidad_id') ? ' is-invalid' : '' }}" name="especialidad_id">
+        @foreach($specialties as $specialty)
+            <option value="{{ $specialty->id }}" {{ $doctor->EspecialidadID == $specialty->id ? 'selected' : '' }}>
+                {{ $specialty->Nombre }}
+            </option>
+        @endforeach
+    </select>
+    {!! $errors->first('especialidad_id', '<div class="invalid-feedback">:message</div>') !!}
+</div>
+<div class="form-group">
+    {{ Form::label('nombre', 'Nombre del Doctor') }}
+    {{ Form::text('nombre', $doctor->nombre, ['class' => 'form-control' . ($errors->has('nombre') ? ' is-invalid' : ''), 'placeholder' => 'Nombre del Doctor']) }}
+    {!! $errors->first('nombre', '<div class="invalid-feedback">:message</div>') !!}
+</div>
+
 
     </div>
     <div class="box-footer mt20">

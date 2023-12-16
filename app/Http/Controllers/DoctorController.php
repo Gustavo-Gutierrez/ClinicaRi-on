@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use App\Models\Especialidad;
 
 /**
  * Class DoctorController
@@ -73,8 +74,11 @@ class DoctorController extends Controller
     public function edit($id)
     {
         $doctor = Doctor::find($id);
+    $specialties = Especialidad::all();
 
-        return view('doctor.edit', compact('doctor'));
+    return view('doctor.edit', compact('doctor', 'specialties'));
+
+        
     }
 
     /**

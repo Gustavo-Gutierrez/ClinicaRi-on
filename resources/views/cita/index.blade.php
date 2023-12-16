@@ -37,11 +37,11 @@
                                         <th>No</th>
                                         
 										<th>Fechahora</th>
-										<th>Pacienteid</th>
-										<th>Personalid</th>
-										<th>Turnoid</th>
-										<th>Especialidadid</th>
-
+										<th>Paciente</th>
+										<th>Personal</th>
+										<th>Turno</th>
+										<th>Especialidad</th>
+                                        <th>Doctor</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -51,10 +51,15 @@
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $cita->Fechahora }}</td>
-											<td>{{ $cita->PacienteID }}</td>
-											<td>{{ $cita->PersonalID }}</td>
-											<td>{{ $cita->TurnoID }}</td>
-											<td>{{ $cita->EspecialidadID }}</td>
+											<td>{{ $cita->Paciente->Nombre }}</td>
+											<td>{{ $cita->Personal->user->name }}</td>
+											<td>{{ $cita->Turno->Hora_inicio."--".$cita->Turno->Hora_fin }}</td>
+											<td>{{ $cita->Especialidad->Nombre }}</td>
+                                            <td>
+                                            @if ($cita->Especialidad->doctors->isNotEmpty())
+                                            {{ $cita->Especialidad->doctors->first()->user->name }}
+                                             @endif
+                                            </td>
 
                                             <td>
                                                 <form action="{{ route('citas.destroy',$cita->id) }}" method="POST">

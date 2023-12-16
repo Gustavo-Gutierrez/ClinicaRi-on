@@ -42,8 +42,8 @@
 										<th>Motivo</th>
 										<th>Observacion</th>
 										<th>Citaid</th>
-										<th>Pacienteid</th>
-										<th>Doctorid</th>
+										<th>Paciente</th>
+										<th>Doctor</th>
 
                                         <th></th>
                                     </tr>
@@ -57,10 +57,10 @@
 											<td>{{ $consulta->Fechahora }}</td>
 											<td>{{ $consulta->Instrucciones }}</td>
 											<td>{{ $consulta->Motivo }}</td>
-											<td>{{ $consulta->Observacion }}</td>
+											<td>{{ $consulta->Observacion }}</td> 
 											<td>{{ $consulta->CitaID }}</td>
-											<td>{{ $consulta->PacienteID }}</td>
-											<td>{{ $consulta->DoctorID }}</td>
+											<td>{{ $consulta->Paciente->Nombre }}</td>
+                                            <td>{{ $consulta->Doctor->user->name }}</td> <!-- Displaying the doctor's name -->
 
                                             <td>
                                                 <form action="{{ route('consultas.destroy',$consulta->id) }}" method="POST">

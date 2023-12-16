@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Horario;
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use App\Models\Personal;
+use App\Models\Doctor;
+use App\Models\Bitacora;
+use Illuminate\Support\Facades\Auth;
 /**
  * Class HorarioController
  * @package App\Http\Controllers
@@ -43,10 +47,32 @@ class HorarioController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Horario::$rules);
+        //request()->validate(Horario::$rules);
 
         $horario = Horario::create($request->all());
+//Bitacora
+$id2 = Auth::id();
+$user = User::where('id', $id2)->first();
+$tipo = "default";
+$doctor =Doctor::where('id', $id2)->first();
+$personal =Personal::where('id', $id2)->first();
 
+if ($doctor && $doctor->id == $id2) {
+    $tipo = "Doctor";
+}
+
+if ($personal && $personal->id == $id2) {
+    $tipo = "Enfermera/ro";
+}
+$action = "Creó un registro nuevo en la tabla Horario";
+$bitacora = Bitacora::create();
+$bitacora->tipou = $tipo;
+$bitacora->name = $user->name;
+$bitacora->actividad = $action;
+$bitacora->fechaHora = date('Y-m-d H:i:s');
+$bitacora->ip = $request->ip();
+$bitacora->save();
+//----------
         return redirect()->route('horarios.index')
             ->with('success', 'Horario created successfully.');
     }
@@ -86,10 +112,32 @@ class HorarioController extends Controller
      */
     public function update(Request $request, Horario $horario)
     {
-        request()->validate(Horario::$rules);
+       // request()->validate(Horario::$rules);
 
         $horario->update($request->all());
+//Bitacora
+$id2 = Auth::id();
+$user = User::where('id', $id2)->first();
+$tipo = "default";
+$doctor =Doctor::where('id', $id2)->first();
+$personal =Personal::where('id', $id2)->first();
 
+if ($doctor && $doctor->id == $id2) {
+    $tipo = "Doctor";
+}
+
+if ($personal && $personal->id == $id2) {
+    $tipo = "Enfermera/ro";
+}
+$action = "Edito un Horario";
+$bitacora = Bitacora::create();
+$bitacora->tipou = $tipo;
+$bitacora->name = $user->name;
+$bitacora->actividad = $action;
+$bitacora->fechaHora = date('Y-m-d H:i:s');
+$bitacora->ip = $request->ip();
+$bitacora->save();
+//----------
         return redirect()->route('horarios.index')
             ->with('success', 'Horario updated successfully');
     }
@@ -102,7 +150,29 @@ class HorarioController extends Controller
     public function destroy($id)
     {
         $horario = Horario::find($id)->delete();
+//Bitacora
+$id2 = Auth::id();
+$user = User::where('id', $id2)->first();
+$tipo = "default";
+$doctor =Doctor::where('id', $id2)->first();
+$personal =Personal::where('id', $id2)->first();
 
+if ($doctor && $doctor->id == $id2) {
+    $tipo = "Doctor";
+}
+
+if ($personal && $personal->id == $id2) {
+    $tipo = "Enfermera/ro";
+}
+$action = "Elimino una Horario"; 
+$bitacora = Bitacora::create();
+$bitacora->tipou = $tipo;
+$bitacora->name = $user->name;
+$bitacora->actividad = $action;
+$bitacora->fechaHora = date('Y-m-d H:i:s');
+$bitacora->ip = $request->ip();
+$bitacora->save();
+//----------
         return redirect()->route('horarios.index')
             ->with('success', 'Horario deleted successfully');
     }

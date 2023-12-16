@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Turno;
 use Illuminate\Http\Request;
+use App\Models\Doctor;
+use App\Models\User;
+
 
 /**
  * Class TurnoController
@@ -19,8 +22,9 @@ class TurnoController extends Controller
     public function index()
     {
         $turnos = Turno::paginate();
-
-        return view('turno.index', compact('turnos'))
+        $doctor = Doctor::paginate();
+        $user = User::paginate();
+        return view('turno.index', compact('turnos', 'doctor', 'user'))
             ->with('i', (request()->input('page', 1) - 1) * $turnos->perPage());
     }
 

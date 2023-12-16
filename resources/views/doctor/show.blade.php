@@ -25,10 +25,13 @@
                             {{ $doctor->fecha_titulo }}
                         </div>
                         <div class="form-group">
-                            <strong>Especialidadid:</strong>
-                            {{ $doctor->EspecialidadID }}
+                        <strong>Especialidad:</strong>
+                        {{ $doctor->especialidad->Nombre }}
                         </div>
-
+                        <div class="form-group">
+    <strong>Doctor:</strong>
+    {{ $doctor->user->name }} <!-- Ajusta este campo según la estructura de tu modelo Doctor -->
+</div>
                     </div>
                 </div>
             </div>

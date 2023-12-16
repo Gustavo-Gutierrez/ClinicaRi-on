@@ -34,11 +34,10 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
-                                        
-										<th>Hora Fin</th>
+                                        <th>No</th>					
 										<th>Hora Inicio</th>
-										<th>Doctorid</th>
+                                        <th>Hora Fin</th>
+										<th>Doctor</th>
 
                                         <th></th>
                                     </tr>
@@ -47,10 +46,9 @@
                                     @foreach ($turnos as $turno)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+                                            <td>{{ $turno->Hora_inicio }}</td>
 											<td>{{ $turno->Hora_fin }}</td>
-											<td>{{ $turno->Hora_inicio }}</td>
-											<td>{{ $turno->DoctorID }}</td>
+											<td>{{ $turno->doctor->user->name }}</td>
 
                                             <td>
                                                 <form action="{{ route('turnos.destroy',$turno->id) }}" method="POST">

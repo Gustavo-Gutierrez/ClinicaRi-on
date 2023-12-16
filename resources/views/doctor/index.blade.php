@@ -35,10 +35,11 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Fecha Titulo</th>
-										<th>Especialidadid</th>
-
+                                        <th>Fecha Titulo</th>
+                                        <!-- Modifica esta línea para mostrar el Nombre de la Especialidad -->
+                                        <th>Especialidad</th>
+                                        <!-- Agrega esta línea -->
+                                        <th>Doctor Name</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -46,10 +47,10 @@
                                     @foreach ($doctors as $doctor)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $doctor->fecha_titulo }}</td>
-											<td>{{ $doctor->EspecialidadID }}</td>
-
+                                            <td>{{ $doctor->fecha_titulo }}</td>
+                                            <!-- Modifica esta línea para mostrar el Nombre de la Especialidad -->
+                                            <td>{{ $doctor->especialidad->Nombre }}</td>
+                                            <td>{{ $doctor->user->name }}</td>
                                             <td>
                                                 <form action="{{ route('doctors.destroy',$doctor->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('doctors.show',$doctor->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
