@@ -75,6 +75,7 @@ $bitacora->fechaHora = date('Y-m-d H:i:s');
 $bitacora->ip = $request->ip();
 $bitacora->save();
 //----------
+
         return redirect()->route('citas.index')
             ->with('success', 'Cita created successfully.');
     }
@@ -196,4 +197,5 @@ $bitacora->save();
     return view('cita.calendario',compact('consulta'));
 
 }
+
 }

@@ -206,7 +206,9 @@ Route::resource('users', UserController::class);
 Route::resource('indicadors', IndicadorhclinicoController::class);
 //rutas de la IA de reconocimiento de imagen
 Route::post('imageOCR', [OCRController::class, 'imageOCR'])->name('imageOCR');
+Route::post('imageOCR2', [OCRController::class, 'imageOCR2'])->name('imageOCR2');
 Route::get('archivo', [OCRController::class, 'index'])->name('index');
+Route::get('archivo2', [OCRController::class, 'index2'])->name('index2');
 
 Route::get('/generate-pdf', [ReportController::class, 'generatePDF']);
 Route::get('/generate-csv', [ReportController::class, 'generateCSV']);

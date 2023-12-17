@@ -13,7 +13,10 @@ class OCRController extends Controller
     {
         return view('archivo.index');
     }
-
+    public function index2()
+    {
+        return view('archivo.index2');
+    }
 
     public function imageOCR(Request $request)
     {
@@ -105,6 +108,115 @@ class OCRController extends Controller
             'totalCost' => $totalCost,  // Paso el costo total como variable 'totalCost'
             'success' => 'Imagen subida correctamente',
         ]);
+        
+         }
+         public function imageOCR2(Request $request)
+    {
+
+        $request->validate([
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Valida que sea una imagen
+        ]);
+        $imageFile = $request->file('file');
+
+        // Tu credencial JSON 
+        putenv('GOOGLE_APPLICATION_CREDENTIALS=D:\Laragon\laragon\www\Clinica/credencial.json');
+
+        // Crea una instancia ImageAnnotatorClient
+        $imageAnnotator = new ImageAnnotatorClient();
+
+        // Lee la imagen
+        $image = file_get_contents($imageFile->getPathname());
+
+        // Detecta el texto, hace un dd($response) para que le entendas mejor
+        $response = $imageAnnotator->textDetection($image);
+        
+        
+        $texts = $response->getTextAnnotations();
+        
+        
+
+        $wordInfo = [];
+        
+        // Del array texts saco el valor descripcion y sus vertices y lo meto en este nuevo array
+        foreach (iterator_to_array($texts) as $index => $text) {
+            if ($index === 0) {
+                continue;
+            }
+            $description = $text->getDescription();
+            $vertices = $text->getBoundingPoly()->getVertices();
+            $wordInfo[] = [
+                'word' => $description,
+                'boundingBox' => [
+                    'x' => $vertices[0]->getX(),
+                    'y' => $vertices[0]->getY(),
+                ],
+                'check_value' => 1,
+            ];
+        }
+        
+         // Consulta la base de datos para obtener precios de análisis
+         $medicamento = [];
+          // Lo que te comentaba de comparar los X y Y para saber si estan en la misma linea
+        //Les puse si estan en -35  +35 en Y es porque estan en la misma linea
+        foreach ($wordInfo as $index => $wordData) {
+            if ($wordInfo[$index]['check_value'] == 1) {
+                $wordInfo[$index]['check_value'] = 0;
+                $currentY = $wordData['boundingBox']['y'];
+                $concatenatedWord = $wordData['word'];
+
+                foreach ($wordInfo as $otherIndex => $otherWordData) {
+                    if ($otherWordData['check_value'] == 1) {
+                        $otherY = $otherWordData['boundingBox']['y'];
+                
+                        if ($otherY >= $currentY - 18 && $otherY <= $currentY + 18) {
+                            $concatenatedWord .= ' ' . $otherWordData['word'];
+                            $wordInfo[$otherIndex]['check_value'] = 0;
+                        }
+                    }
+
+                   
+                    
+                }
+               
+      // dd($wordInfo);         
+    $medicamento = [];
+    $capturing = false;
+    $capturedText = '';
+
+    // Itera sobre las palabras para capturar el rango desde "rp/" hasta "fecha"
+    foreach ($wordInfo as $wordData) {
+        $word = strtolower($wordData['word']);
+    
+        if ($word === 'rpd') {
+            $capturing = true;
+            $capturedText = '';
+        }
+    
+        if ($capturing) {
+            $capturedText .= $wordData['word'] . ' ';
+        }
+    
+        if ($word === 'fecha') {
+            $capturing = false;
+            // Puedes hacer algo con la cadena capturada, como mostrarla
+            $medicamento[] =$capturedText;
+        }
+    }
+        }
+    }
+       // dd($medicamento);
+      
+        
+         $imageAnnotator->close();
+         
+      
+
+          
+         return view('archivo.index2', [
+            'medicamento' => $medicamento,
+            'success' => 'Imagen subida correctamente',
+        ]);
+        
          }
          private function getPricesFromDatabase($siWords)
          {

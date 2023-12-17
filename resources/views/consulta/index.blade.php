@@ -60,8 +60,13 @@
 											<td>{{ $consulta->Observacion }}</td> 
 											<td>{{ $consulta->CitaID }}</td>
 											<td>{{ $consulta->Paciente->Nombre }}</td>
-                                            <td>{{ $consulta->Doctor->user->name }}</td> <!-- Displaying the doctor's name -->
-
+                                            <td>
+    @if ($consulta->doctor)
+        {{ $consulta->doctor->user->name }}
+    @else
+        No asignado
+    @endif
+</td>
                                             <td>
                                                 <form action="{{ route('consultas.destroy',$consulta->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('consultas.show',$consulta->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>

@@ -22,7 +22,8 @@ class ConsultaController extends Controller
      */
     public function index()
     {
-        $consultas = Consulta::with('Doctor.user', 'Paciente')->paginate();
+        $consultas = Consulta::paginate();
+       
 
         return view('consulta.index', compact('consultas'))
             ->with('i', (request()->input('page', 1) - 1) * $consultas->perPage());

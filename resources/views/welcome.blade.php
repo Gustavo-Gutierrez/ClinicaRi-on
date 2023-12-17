@@ -129,7 +129,7 @@
 
         <!-- Botón debajo de la imagen -->
         <a href="{{ route('index') }}" class="btn-below-image">Consultar Precio de Analisis Mediante IA de Imagen</a>
-
+        <a href="{{ route('index2') }}" class="btn-below-image">Consultar Medicamentos de Recetas Mediante IA de Imagen</a>
         <div class="grid">
             <div class="card">
                 <h2 class="text-2xl font-semibold text-gray mb-4">Nuestros Servicios</h2>
