@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Historial;
+use App\Models\Paciente;
 use Illuminate\Http\Request;
 
 /**
@@ -59,9 +60,24 @@ class HistorialController extends Controller
      */
     public function show($id)
     {
-        $historial = Historial::find($id);
+        $paciente = Paciente::find($id);
 
-        return view('historial.show', compact('historial'));
+    // Assuming 'historials' is the relationship method that defines the association
+    $historial = $paciente->historials()->first();
+
+    // Check if a historial was found
+    if ($historial) {
+        // Access the 'id' properties of the $paciente and $historial objects
+        $pacienteID = $paciente->id;
+        $historialID = $historial->id;
+
+
+        // Pass the IDs to the view
+        return view('historial.show', compact('pacienteID', 'historialID','historial'));
+    } else {
+        // Handle the case where no historial is found
+        return view('historial.not_found');
+    }
     }
 
     /**

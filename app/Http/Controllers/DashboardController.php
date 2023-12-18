@@ -54,8 +54,17 @@ class DashboardController extends Controller
        ->take(5) // Obtén los 5 diagnósticos más comunes (puedes ajustar según sea necesario)
        ->get();
 
+//Porcentaje compartivo de los dos ultimos meses
+$mesActualInicio = Carbon::now()->startOfMonth();
+$mesActualfinal = Carbon::now()->endOfMonth();
+$totalPacientesMesActual = Paciente::whereBetween('created_at', [$mesActualInicio, $mesActualfinal])->count();
+$porcentaje = 0;
 
+if ($totalPacientesUltimoMes != 0) {
+    $porcentaje = intval((($totalPacientesMesActual - $totalPacientesUltimoMes) / $totalPacientesUltimoMes) * 100);
+}
+$porcentajeString = $porcentaje . '%';
        return view('reportes.dashboard', compact('totalPacientes','totalCirugias','totalAnalisis','totalFacturado','analisisMasSolicitados','medicosSolicitados',
-                     'diagnosticosComunes'));
+                     'diagnosticosComunes','porcentaje','porcentajeString'));
     }
 }

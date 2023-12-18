@@ -158,7 +158,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 /**GENERADO PARA LOS CRUDS*/
 Route::resource('administrativos', AdministrativoController::class);
-Route::resource('anlisis', AnalisiController::class);
+Route::resource('analisis', AnalisiController::class);
 Route::resource('chatbots', ChatbotController::class);
 Route::resource('cirujias', CirujiaController::class);
 Route::resource('cirujia', CirujiumController::class);
@@ -212,7 +212,8 @@ Route::get('archivo', [OCRController::class, 'index'])->name('index');
 Route::get('archivo2', [OCRController::class, 'index2'])->name('index2');
 
 Route::get('/generate-pdf', [ReportController::class, 'generatePDF']);
-Route::get('/generate-csv', [ReportController::class, 'generateCSV']);
+Route::get('/generate-csv/{historial}', [ReportController::class, 'generateCSV'])->name('generate-csv');;
+Route::resource('reportes', ReportController::class);
 
 // Ruta para mostrar el calendario
 Route::get('/calendario', [App\Http\Controllers\CitaController::class, 'calendario'])->name('calendario')->middleware('auth');

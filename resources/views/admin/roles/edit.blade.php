@@ -24,7 +24,7 @@
 
             <h2 class="h5"> Listado de roles</h2>
 
-            {!! Form::model($user, ['route' => ['roles.update', $user], 'method' => 'PUT']) !!}
+           {!! Form::model($user, ['route' => ['roles.update', $user], 'method' => 'PUT']) !!}
             @foreach ($roles as $role)
                 <div>
                     <label>

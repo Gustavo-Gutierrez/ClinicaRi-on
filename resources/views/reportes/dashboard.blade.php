@@ -30,6 +30,13 @@
     <!-- Page plugins -->
     <!-- Argon CSS -->
     <link rel="stylesheet" href="/myapp/static/assets/css/argon.css?v=1.2.0" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script> <!-- Add this line -->
+
+    <!-- Configure Chart.js to use Moment.js -->
+    <script>
+        Chart.register(ChartMoment); // Register the adapter
+    </script>
 </head>
 @extends('adminlte::page')
 @section('content')
@@ -89,9 +96,13 @@
                                         </div>
                                     </div>
                                     <p class="mt-3 mb-0 text-sm">
-                                        <span id="porcentajeCambio" class="text-success mr-2"><i
-                                                class="fa fa-arrow-up"></i></span>
-                                        <span class="text-nowrap">v</span>
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Crecimiento mensual</h5><br>
+                                        @if ($porcentaje < 0)
+                                            <span id="porcentajeCambio" class="text-danger mr-2"><i class="fa fa-arrow-down"></i></span>
+                                        @else
+                                            <span id="porcentajeCambio" class="text-success mr-2"><i class="fa fa-arrow-up"></i></span>
+                                        @endif
+                                        <span class="text-nowrap">{{ $porcentajeString }}</span>
                                     </p>
                                 </div>
                             </div>
@@ -285,6 +296,17 @@
                 </div>
 
 
+                <h1>ARIMA Model</h1>
+
+<label for="startDate">Desde: </label>
+<input type="date" id="startDate" required>
+
+<label for="endDate">Hasta :</label>
+<input type="date" id="endDate" required>
+
+<button onclick="fetchData()">Proyeccion</button>
+
+<canvas id="arimaChart" width="800" height="400"></canvas>
 
 
             </div>
@@ -405,7 +427,94 @@
     });
     </script>
 
+<script>
+        var myChart;   
+        function fetchData() {
+            var startDate = document.getElementById('startDate').value;
+            var endDate = document.getElementById('endDate').value;
 
+            if (!startDate || !endDate) {
+                alert("Porfavor seleccione un intervalo de tiempo");
+                return;
+            }
+            console.log(startDate);
+            console.log(endDate);
+            fetch(`http://3.22.167.79/get_data?startDate=${startDate}&endDate=${endDate}`)
+                .then(response => response.json())
+                .then(arimaResult => {
+                    var dates = arimaResult.dates.slice(1);;
+                    var actualCounts = arimaResult.actual.slice(1);;
+                    var fittedValues = arimaResult.fitted_values;
+                    var lastDate = dates[dates.length - 1];
+
+                    var extendedDates = dates.concat(getNextWeeksDates(lastDate, 6));
+                    var extendedFittedValues = fittedValues.concat(new Array(6).fill(null));
+
+                    // Create a chart using Chart.js
+                    if (myChart) {
+                        myChart.destroy();
+                    }
+                    var ctx = document.getElementById('arimaChart').getContext('2d');
+                    myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: extendedDates,
+                            datasets: [
+                                {
+                                    label: 'Pacientes',
+                                    data: actualCounts,
+                                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: 'Proyeccion',
+                                    data: extendedFittedValues,
+                                    borderColor: 'rgba(255, 99, 132, 1)',
+                                    borderWidth: 1,
+                                    borderDash: [5, 5] 
+                                }
+                            ]
+                        },
+                        options: {
+                            scales: {
+                                x: {
+                                    type: 'time', 
+                                    time: {
+                                        unit: 'week' 
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: 'Semanas'
+                                    }
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Pacientes'
+                                    }
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching ARIMA results:', error));
+            }
+
+            function getNextWeeksDates(lastDate, weeks) {
+                var currentDate = new Date(lastDate);
+                var nextWeeksDates = [];
+            
+                for (var i = 1; i <= weeks; i++) {
+                    var nextDate = new Date(currentDate);
+                    nextDate.setDate(nextDate.getDate() + 7 * i);
+                    nextWeeksDates.push(nextDate.toISOString().split('T')[0]);
+                }
+            
+                return nextWeeksDates;
+            }    
+    </script>
     @endsection
 
 

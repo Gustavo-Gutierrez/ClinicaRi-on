@@ -53,7 +53,7 @@ class HistorialClinico extends Model
      */
     public function historial()
     {
-        return $this->hasOne('App\Models\Historial', 'id', 'id');
+        return $this->hasOne('App\Models\Historial', 'HistorialID', 'id');
     }
     
     /**

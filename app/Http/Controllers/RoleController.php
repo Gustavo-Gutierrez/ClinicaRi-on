@@ -45,18 +45,22 @@ class RoleController extends Controller
         //
     }
 
-    public function edit(User $user)
+    public function edit($id)
     {
+        $user=User::find($id);
         $roles = Role::all();
         return (view('admin/roles.edit', compact('user', 'roles')));
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request,$user)
     {
+        $user = User::find($user);
+        $user = User::with('roles')->find($user->id);
+        if (!$user) {
+            dd('User not found');
+        }
         $user->roles()->sync($request->roles);
-      
         return redirect()->route('roles.edit', $user)->with('info', 'Se asignaron los roles correctamente');
-
     }
 
     public function destroy($id)
