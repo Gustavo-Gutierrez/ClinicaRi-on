@@ -398,12 +398,12 @@ return [
     
     [
         'text' => 'Historial Clinico',
-        'url'  => '/historial_clinicos',
+        'url'  => '/historial-clinicos',
         'icon' => 'fas fa-fw fa-quote-left',
     ],
     [
-        'text' => 'Historial de Transplante',
-        'url'  => '',
+        'text' => 'Historial de Cirujias',
+        'url'  => '/historial-cirujias',
         'icon' => 'fas fa-fw fa-quote-left',
     ],
 ],

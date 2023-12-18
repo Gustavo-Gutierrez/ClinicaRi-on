@@ -33,17 +33,17 @@
         </div>
         <div class="form-group">
             {{ Form::label('CitaID') }}
-            {{ Form::text('cita', $consulta->CitaID, ['class' => 'form-control' . ($errors->has('CitaID') ? ' is-invalid' : ''), 'placeholder' => 'Citaid']) }}
+            {{ Form::text('CitaID', $consulta->CitaID, ['class' => 'form-control' . ($errors->has('CitaID') ? ' is-invalid' : ''), 'placeholder' => 'CitaID']) }}
             {!! $errors->first('CitaID', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('PacienteID') }}
-            {{ Form::text('paciente', $consulta->PacienteID, ['class' => 'form-control' . ($errors->has('PacienteID') ? ' is-invalid' : ''), 'placeholder' => 'Pacienteid']) }}
+            {{ Form::text('PacienteID', $consulta->PacienteID, ['class' => 'form-control' . ($errors->has('PacienteID') ? ' is-invalid' : ''), 'placeholder' => 'Pacienteid']) }}
             {!! $errors->first('PacienteID', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('DoctorID') }}
-            {{ Form::text('doctor', $consulta->DoctorID, ['class' => 'form-control' . ($errors->has('DoctorID') ? ' is-invalid' : ''), 'placeholder' => 'Doctorid']) }}
+            {{ Form::text('DoctorID', $consulta->DoctorID, ['class' => 'form-control' . ($errors->has('DoctorID') ? ' is-invalid' : ''), 'placeholder' => 'Doctorid']) }}
             {!! $errors->first('DoctorID', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 </div>
