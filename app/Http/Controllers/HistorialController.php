@@ -76,7 +76,7 @@ class HistorialController extends Controller
         return view('historial.show', compact('pacienteID', 'historialID','historial'));
     } else {
         // Handle the case where no historial is found
-        return view('historial.not_found');
+        return view('historial.index');
     }
     }
 
