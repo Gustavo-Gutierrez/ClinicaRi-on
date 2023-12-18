@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="{{ asset('custom_assets/form.css') }}">
+<link rel="stylesheet" href="{{ asset('custom_assets/buttomassistant.css') }}">
+
+
 <div class="floating-button" id="floatingButton">
     <button id="textSpeechButton" type="button" class="assistant-button">
         <i class="fas fa-microphone"></i>
@@ -56,11 +60,11 @@
 
 
 @section('css')
-@vite(['resources/css/form.css','resources/css/buttomassistant.css'])
+
 @stop
 
 @section('js')
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-@vite(['resources/js/assistant.js'])
+<script src="{{ asset('custom_assets/assistant.js') }}"></script>
 @stop

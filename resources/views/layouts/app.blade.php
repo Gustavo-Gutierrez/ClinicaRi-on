@@ -20,6 +20,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+<link rel="stylesheet" href="{{ asset('custom_assets/form.css') }}">
+<link rel="stylesheet" href="{{ asset('custom_assets/buttomassistant.css') }}">
+<script src="{{ asset('custom_assets/assistant.js') }}"></script>
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js','resources/css/.*','resources/css/home.css',])
 </head>
