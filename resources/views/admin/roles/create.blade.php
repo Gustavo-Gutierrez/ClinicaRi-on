@@ -18,7 +18,7 @@
         </div>
 
         <div class="card-body">
-            <form action="{{ route('roles.create') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('roles.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-floating">
                     <input type="text" placeholder="name" class="form-control" name="name"

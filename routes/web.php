@@ -88,12 +88,12 @@ Route::prefix('/admin')->group(function () {
     Route::get('/roles/create', [App\Http\Controllers\RoleController::class, 'create'])
     ->middleware('checkRole:Administrador')
     ->name('roles.create');
-    Route::post('/roles/create', [App\Http\Controllers\RoleController::class, 'store']);
+    Route::post('/roles/store', [App\Http\Controllers\RoleController::class, 'store'])->name('roles.store');
 
-    Route::get('/roles/edit/{user}', [App\Http\Controllers\RoleController::class, 'edit'])
+    Route::get('/roles/{user}/edit', [App\Http\Controllers\RoleController::class, 'edit'])
     ->middleware('checkRole:Administrador')
     ->name('roles.edit');
-    Route::put('/roles/edit/{user}', [App\Http\Controllers\RoleController::class, 'update'])
+    Route::put('/roles/update/{user}', [App\Http\Controllers\RoleController::class, 'update'])
     ->middleware('checkRole:Administrador')
     ->name('roles.update');
 
@@ -104,12 +104,12 @@ Route::prefix('/admin')->group(function () {
     Route::get('/roles/create', [App\Http\Controllers\RoleController::class, 'create'])
     ->middleware('checkRole:Administrador')
     ->name('roles.create');
-    Route::post('/roles/create', [App\Http\Controllers\RoleController::class, 'store']);
+    Route::post('/roles/store', [App\Http\Controllers\RoleController::class, 'store'])->name('roles.store');
 
     Route::get('/roles/edit/{user}', [App\Http\Controllers\RoleController::class, 'edit'])
     ->middleware('checkRole:Administrador')
     ->name('roles.edit');
-    Route::put('/roles/edit/{user}', [App\Http\Controllers\RoleController::class, 'update'])
+    Route::put('/roles/update/{user}', [App\Http\Controllers\RoleController::class, 'update'])
     ->middleware('checkRole:Administrador')
     ->name('roles.update');
 
