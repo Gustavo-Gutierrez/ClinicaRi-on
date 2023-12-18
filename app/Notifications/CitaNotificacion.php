@@ -35,9 +35,9 @@ class CitaNotificacion extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('Se ha creado una nueva cita.')
+            ->action('Ver Cita', url('/citas'))
+            ->line('¡Gracias por usar nuestra aplicación!');
     }
 
     /**

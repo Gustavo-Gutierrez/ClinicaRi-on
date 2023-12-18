@@ -8,6 +8,8 @@ use App\Models\Bitacora;
 use App\Models\Doctor;
 use App\Models\Personal;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Notifiable;
+
 /**
  * Class UserController
  * @package App\Http\Controllers

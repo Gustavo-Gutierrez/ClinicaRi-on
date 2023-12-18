@@ -131,16 +131,26 @@
 
                 <!-- ... (código anterior de tu vista) -->
                 <div>
-        @if(isset($medicamento) && count($medicamento) > 0)
-            <p>Cadenas Capturadas:</p>
-            <ul>
-                @foreach($medicamento as $capturedText)
-                    <li>{{ $capturedText }}</li>
-                @endforeach
-            </ul>
-        @else
-            <p>No se encontró ninguna cadena capturada.</p>
-        @endif
+                @if(isset($receta) && count($receta) > 0 && isset($medicamento) && count($medicamento) > 0)
+    <p>Recetas y Medicamentos:</p>
+    <ul>
+        @for($i = 0; $i < min(count($receta), count($medicamento)); $i++)
+        <li>
+                <strong>Medicamento {{$i + 1}}:</strong> {{ $receta[$i] }}<br>
+                <strong>Medicamento Farmacorp :</strong>
+                <a href="https://farmacorp.com/search?type=article%2Cpage%2Cproduct&q={{ urlencode($medicamento[$i]) }}" target="_blank">
+                    {{ $medicamento[$i] }}
+                </a><br>
+                <strong>Medicamento Chavez :</strong>
+                <a href="https://online.farmaciachavez.com.bo/?s={{ urlencode($medicamento[$i]) }}&post_type=product" target="_blank">
+                    {{ $medicamento[$i] }}
+                </a>
+            </li>
+        @endfor
+    </ul>
+@else
+    <p>No hay datos disponibles.</p>
+@endif
     </div>
         </div>
     </div>

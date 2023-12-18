@@ -424,6 +424,11 @@ return [
         'icon' => 'fas fa-fw fa-laptop-code',
     ],
     [
+        'text' => 'Prediccion de Paciente',
+        'url'  => '/prediccion',
+        'icon' => 'fas fa-fw fa-laptop-code',
+    ],
+    [
         'text' => 'Generar Reportes',
         'url'  => '/reportes',
         'icon' => 'fas fa-fw fa-quote-left',

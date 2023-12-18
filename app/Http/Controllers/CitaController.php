@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Personal;
 use App\Models\Bitacora;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\CitaNotificacion;
 /**
  * Class CitaController
  * @package App\Http\Controllers
@@ -79,7 +80,7 @@ $bitacora->save();
         return redirect()->route('citas.index')
             ->with('success', 'Cita created successfully.');
     }
-
+ 
     /**
      * Display the specified resource.
      *

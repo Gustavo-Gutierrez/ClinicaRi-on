@@ -55,6 +55,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\IndicadoreshcirujiaController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\BitacoraController;
+use App\Http\Controllers\PrediccionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -218,4 +219,6 @@ Route::get('/calendario', [App\Http\Controllers\CitaController::class, 'calendar
 
 //Bitacoras
 Route::resource('/bitacoras', BitacoraController::class);
+
+Route::resource('/prediccion', PrediccionController::class);
 

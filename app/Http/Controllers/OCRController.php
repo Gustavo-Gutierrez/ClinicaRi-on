@@ -130,7 +130,6 @@ class OCRController extends Controller
         // Detecta el texto, hace un dd($response) para que le entendas mejor
         $response = $imageAnnotator->textDetection($image);
         
-        
         $texts = $response->getTextAnnotations();
         
         
@@ -154,58 +153,46 @@ class OCRController extends Controller
             ];
         }
         
-         // Consulta la base de datos para obtener precios de análisis
-         $medicamento = [];
-          // Lo que te comentaba de comparar los X y Y para saber si estan en la misma linea
-        //Les puse si estan en -35  +35 en Y es porque estan en la misma linea
-        foreach ($wordInfo as $index => $wordData) {
-            if ($wordInfo[$index]['check_value'] == 1) {
-                $wordInfo[$index]['check_value'] = 0;
-                $currentY = $wordData['boundingBox']['y'];
-                $concatenatedWord = $wordData['word'];
+        
+       // dd($medicamento);
+       $receta = [];
+$capturing = false;
+$capturedText = '';
 
-                foreach ($wordInfo as $otherIndex => $otherWordData) {
-                    if ($otherWordData['check_value'] == 1) {
-                        $otherY = $otherWordData['boundingBox']['y'];
-                
-                        if ($otherY >= $currentY - 18 && $otherY <= $currentY + 18) {
-                            $concatenatedWord .= ' ' . $otherWordData['word'];
-                            $wordInfo[$otherIndex]['check_value'] = 0;
-                        }
-                    }
+foreach ($wordInfo as $wordData) {
+    $word = strtolower($wordData['word']);
 
-                   
-                    
-                }
-               
-      // dd($wordInfo);         
-    $medicamento = [];
-    $capturing = false;
-    $capturedText = '';
+    if ($word === 'rpd') {
+        $capturing = true;
+        $capturedText = '';
+    }
 
-    // Itera sobre las palabras para capturar el rango desde "rp/" hasta "fecha"
-    foreach ($wordInfo as $wordData) {
-        $word = strtolower($wordData['word']);
-    
-        if ($word === 'rpd') {
-            $capturing = true;
+    if ($word === 'fecha') {
+        $capturing = false;
+        $receta[] = trim($capturedText);
+    }
+
+    if ($capturing) {
+        if (strpos($word, '*') !== false) {
+            $receta[] = trim($capturedText);
             $capturedText = '';
         }
-    
-        if ($capturing) {
-            $capturedText .= $wordData['word'] . ' ';
-        }
-    
-        if ($word === 'fecha') {
-            $capturing = false;
-            // Puedes hacer algo con la cadena capturada, como mostrarla
-            $medicamento[] =$capturedText;
+        $capturedText .= $wordData['word'] . ' ';
+    }
+}
+array_shift($receta);
+$medicamento = [];
+
+
+foreach ($receta as $item) {
+    if (strpos($item, '*') === 0) {
+        $words = explode(' ', trim($item));
+        if (isset($words[1])) {
+            $medicamento[] = $words[1];
         }
     }
-        }
-    }
-       // dd($medicamento);
-      
+}
+
         
          $imageAnnotator->close();
          
@@ -214,6 +201,7 @@ class OCRController extends Controller
           
          return view('archivo.index2', [
             'medicamento' => $medicamento,
+            'receta' => $receta,
             'success' => 'Imagen subida correctamente',
         ]);
         
