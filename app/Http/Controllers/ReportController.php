@@ -12,6 +12,8 @@ use App\Models\HistorialClinico;
 use App\Models\Paciente;
 use App\Models\Servicio;
 use Carbon\Carbon;
+use App\Exports\FacturaExport;
+
 
 class ReportController extends Controller 
 {
@@ -90,6 +92,22 @@ public function totalServiciosDadosUltimoMes()
     $totalServiciosDados = Servicio::whereBetween('Fecha_hora', [$fechaInicio, $fechaFinal])->count();
 
     return $totalServiciosDados;
+}
+
+public function generateFactura()
+{
+    // Obtén todas las facturas sin aplicar un rango de fechas
+    $facturas = Factura::all();
+
+    $totalFacturado = $facturas->sum('Total');
+
+    $data = [
+        'totalFacturado' => $totalFacturado,
+        'facturas' => $facturas,
+    ];
+
+    // Use the FacturaExport class to handle the export logic
+    return Excel::download(new FacturaExport($data), 'reporteFactura.xlsx');
 }
 }
 

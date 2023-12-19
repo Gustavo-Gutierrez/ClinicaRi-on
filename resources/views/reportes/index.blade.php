@@ -44,7 +44,7 @@ Paciente
                 <a href="{{ route('pacientes.index') }}" class="btn btn-primary">Reporte de Historial Clínico de Pacientes</a>
             </td>
             <td>
-                <a href="{{ route('facturas.index') }}" class="btn btn-primary">Reporte de Facturación</a>
+                <a href="{{ route('generateFactura') }}" class="btn btn-primary">Reporte de Facturación</a>
             </td>
             <td>
                 <a href="{{ route('calendario') }}" class="btn btn-primary">Reporte de Gestión de Horarios y Turnos</a>

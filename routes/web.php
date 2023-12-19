@@ -58,6 +58,7 @@ use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\ConsumiServicioController;
 use App\Http\Controllers\PrediccionController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -215,6 +216,7 @@ Route::get('archivo2', [OCRController::class, 'index2'])->name('index2');
 Route::get('/generate-pdf', [ReportController::class, 'generatePDF']);
 Route::get('/generate-csv/{historial}', [ReportController::class, 'generateCSV'])->name('generate-csv');;
 Route::resource('reportes', ReportController::class);
+Route::get('/generate-Factura', [ReportController::class, 'generateFactura'])->name('generateFactura');
 
 // Ruta para mostrar el calendario
 Route::get('/calendario', [App\Http\Controllers\CitaController::class, 'calendario'])->name('calendario')->middleware('auth');

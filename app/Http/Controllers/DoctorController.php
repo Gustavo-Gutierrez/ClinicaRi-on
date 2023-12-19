@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
 use App\Models\Especialidad;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class DoctorController
@@ -12,6 +14,7 @@ use App\Models\Especialidad;
  */
 class DoctorController extends Controller
 {
+    use Notifiable;
     /**
      * Display a listing of the resource.
      *
