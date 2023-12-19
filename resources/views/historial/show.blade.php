@@ -15,6 +15,11 @@
                         </div>
                         <div class="float-right">
                             <a class="btn btn-primary" href="{{ route('historials.index') }}"> {{ __('Back') }}</a>
+                            <a href="{{ url('/generate-pdf') }}" class="btn btn-primary">Generar PDF</a>
+                            <a href="{{ route('generate-csv', ['historial' => $historialID]) }}" class="btn btn-primary">Generar CSV</a>
+
+
+
                         </div>
                     </div>
 
@@ -46,7 +51,7 @@
                         </div>
                         <div class="form-group">
                             <strong>Pacienteid:</strong>
-                            {{ $historial->PacienteID }}
+                            {{ $historial->Paciente->Nombre }}
                         </div>
 
                     </div>

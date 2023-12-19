@@ -398,12 +398,12 @@ return [
     
     [
         'text' => 'Historial Clinico',
-        'url'  => '/historial_clinicos',
+        'url'  => '/historial-clinicos',
         'icon' => 'fas fa-fw fa-quote-left',
     ],
     [
-        'text' => 'Historial de Transplante',
-        'url'  => '',
+        'text' => 'Historial de Cirujias',
+        'url'  => '/historial-cirujias',
         'icon' => 'fas fa-fw fa-quote-left',
     ],
 ],
@@ -563,6 +563,22 @@ return [
                     'type' => 'css',
                     'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
+                ],
+                // Update the location to point to the correct directory
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '/custom_assets/form.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '/custom_assets/buttomassistant.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '/custom_assets/assistant.js',
                 ],
             ],
         ],

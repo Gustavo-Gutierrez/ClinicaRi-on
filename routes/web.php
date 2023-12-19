@@ -88,12 +88,12 @@ Route::prefix('/admin')->group(function () {
     Route::get('/roles/create', [App\Http\Controllers\RoleController::class, 'create'])
     ->middleware('checkRole:Administrador')
     ->name('roles.create');
-    Route::post('/roles/create', [App\Http\Controllers\RoleController::class, 'store']);
+    Route::post('/roles/store', [App\Http\Controllers\RoleController::class, 'store'])->name('roles.store');
 
-    Route::get('/roles/edit/{user}', [App\Http\Controllers\RoleController::class, 'edit'])
+    Route::get('/roles/{user}/edit', [App\Http\Controllers\RoleController::class, 'edit'])
     ->middleware('checkRole:Administrador')
     ->name('roles.edit');
-    Route::put('/roles/edit/{user}', [App\Http\Controllers\RoleController::class, 'update'])
+    Route::put('/roles/update/{user}', [App\Http\Controllers\RoleController::class, 'update'])
     ->middleware('checkRole:Administrador')
     ->name('roles.update');
 
@@ -104,12 +104,12 @@ Route::prefix('/admin')->group(function () {
     Route::get('/roles/create', [App\Http\Controllers\RoleController::class, 'create'])
     ->middleware('checkRole:Administrador')
     ->name('roles.create');
-    Route::post('/roles/create', [App\Http\Controllers\RoleController::class, 'store']);
+    Route::post('/roles/store', [App\Http\Controllers\RoleController::class, 'store'])->name('roles.store');
 
     Route::get('/roles/edit/{user}', [App\Http\Controllers\RoleController::class, 'edit'])
     ->middleware('checkRole:Administrador')
     ->name('roles.edit');
-    Route::put('/roles/edit/{user}', [App\Http\Controllers\RoleController::class, 'update'])
+    Route::put('/roles/update/{user}', [App\Http\Controllers\RoleController::class, 'update'])
     ->middleware('checkRole:Administrador')
     ->name('roles.update');
 
@@ -158,7 +158,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 /**GENERADO PARA LOS CRUDS*/
 Route::resource('administrativos', AdministrativoController::class);
-Route::resource('anlisis', AnalisiController::class);
+Route::resource('analisis', AnalisiController::class);
 Route::resource('chatbots', ChatbotController::class);
 Route::resource('cirujias', CirujiaController::class);
 Route::resource('cirujia', CirujiumController::class);
@@ -167,16 +167,16 @@ Route::resource('citum', CitumController::class);
 Route::resource('consultas', ConsultaController::class);
 Route::resource('consultum', ConsultumController::class);
 Route::resource('doctors', DoctorController::class);
-Route::resource('equipo_cirijas', EquipoCirujiumController::class);
+Route::resource('equipo-cirijas', EquipoCirujiumController::class);
 Route::resource('equipos', EquipoController::class);
 Route::resource('especialidads', EspecialidadController::class);
 Route::resource('excel', ExcelController::class);
 Route::resource('facturas', FacturaController::class);
 Route::resource('failedjobs', FailedjobController::class);
-Route::resource('historial_cirujias', HistorialCirujiaController::class);
-Route::resource('historial_cirujia_rgistros', HistorialCirujiaRgistroController::class);
-Route::resource('historial_cirujiums', HistorialCirujiumController::class);
-Route::resource('historial_clinicos', HistorialClinicoController::class);
+Route::resource('historial-cirujias', HistorialCirujiaController::class);
+Route::resource('historial-cirujia-rgistros', HistorialCirujiaRgistroController::class);
+Route::resource('historial-cirujiums', HistorialCirujiumController::class);
+Route::resource('historial-clinicos', HistorialClinicoController::class);
 Route::resource('historials', HistorialController::class);
 Route::resource('home', HomeController::class);
 Route::resource('horarios', HorarioController::class);
@@ -194,14 +194,14 @@ Route::resource('resultados', ResultadoController::class);
 Route::resource('roles', RoleController::class);
 Route::resource('serv_analisis', ServAnalisiController::class);
 Route::resource('servicios', ServicioController::class);
-Route::resource('solicita_servicios', SolicitaServicioController::class);
+Route::resource('solicita-servicios', SolicitaServicioController::class);
 Route::resource('tipos', TipoController::class);
-Route::resource('tipo_inds', TipoIndController::class);
+Route::resource('tipo-inds', TipoIndController::class);
 Route::resource('transplantes', TransplanteController::class);
 Route::resource('tratamientoshclis', TratamientoshcliController::class);
 Route::resource('tratamientoshcirs', TratamientoshcirController::class);
 Route::resource('turnos', TurnoController::class);
-Route::resource('turno_horarios', TurnoHorarioController::class);
+Route::resource('turno-horarios', TurnoHorarioController::class);
 Route::resource('users', UserController::class);
 
 Route::resource('indicadors', IndicadorhclinicoController::class);
@@ -212,7 +212,8 @@ Route::get('archivo', [OCRController::class, 'index'])->name('index');
 Route::get('archivo2', [OCRController::class, 'index2'])->name('index2');
 
 Route::get('/generate-pdf', [ReportController::class, 'generatePDF']);
-Route::get('/generate-csv', [ReportController::class, 'generateCSV']);
+Route::get('/generate-csv/{historial}', [ReportController::class, 'generateCSV'])->name('generate-csv');;
+Route::resource('reportes', ReportController::class);
 
 
 // Ruta para mostrar el calendario

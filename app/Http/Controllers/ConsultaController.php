@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Personal;
 use App\Models\Doctor;
 use App\Models\Bitacora;
+use App\Notifications\ConsultaCreada;
 use Illuminate\Support\Facades\Auth;
 /**
  * Class ConsultaController
@@ -52,6 +53,10 @@ class ConsultaController extends Controller
         //request()->validate(Consulta::$rules);
 
         $consulta = Consulta::create($request->all());
+        
+        // Envía una notificación por correo electrónico
+        $user = User::find($consulta->DoctorID); // Asegúrate de obtener el usuario al que quieres enviar la notificación
+        $user->notify(new ConsultaCreada($consulta));
 //Bitacora
 $id2 = Auth::id();
 $user = User::where('id', $id2)->first();
