@@ -76,6 +76,9 @@ $bitacora->fechaHora = date('Y-m-d H:i:s');
 $bitacora->ip = $request->ip();
 $bitacora->save();
 //----------
+ // notificacion
+ //$doctor->notify(new CitaNotificacion());
+    self::cita_notificacion($cita);
 
         return redirect()->route('citas.index')
             ->with('success', 'Cita created successfully.');
@@ -195,8 +198,16 @@ $bitacora->save();
     ->join('users', 'consultas.DoctorID', '=', 'users.id')
     ->get();
 
+   
     return view('cita.calendario',compact('consulta'));
 
 }
 
+public function cita_notificacion($cita){
+    $prueba=User::role('Doctor')->get();
+    dd($prueba);
+   // ->each(function(User $user) use ($cita){
+     //   $user->notify(new CitaNotificacion($cita));
+    }
 }
+

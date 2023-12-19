@@ -10,6 +10,7 @@ use App\Models\Factura;
 use App\Models\Paciente;
 use App\Models\Servicio;
 use Carbon\Carbon;
+use App\Exports\FacturaExport;
 
 class ReportController extends Controller
 {
@@ -60,6 +61,27 @@ public function totalServiciosDadosUltimoMes()
     $totalServiciosDados = Servicio::whereBetween('Fecha_hora', [$fechaInicio, $fechaFinal])->count();
 
     return $totalServiciosDados;
+}
+public function generateFactura()
+{
+    $fechaInicio = Carbon::now()->subMonth()->startOfMonth();
+    $fechaFinal = Carbon::now()->subMonth()->endOfMonth();
+
+    $totalFacturado = Factura::whereBetween('Fecha_hora', [$fechaInicio, $fechaFinal])->sum('Total');
+
+    $data = [
+        'fechaInicio' => $fechaInicio,
+        'fechaFinal' => $fechaFinal,
+        'totalFacturado' => $totalFacturado,
+        'otrosDatos' => [
+            'totalPacientes' => $this->totalPacientesRegistradosUltimoMes(),
+            'totalServicios' => $this->totalServiciosDadosUltimoMes(),
+            // ... otros datos
+        ],
+    ];
+
+    // Use the FacturaExport class to handle the export logic
+    return Excel::download(new FacturaExport($data), 'reporteFactura.csv');
 }
 }
 

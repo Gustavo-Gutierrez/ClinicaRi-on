@@ -214,6 +214,7 @@ Route::get('archivo2', [OCRController::class, 'index2'])->name('index2');
 Route::get('/generate-pdf', [ReportController::class, 'generatePDF']);
 Route::get('/generate-csv', [ReportController::class, 'generateCSV']);
 
+
 // Ruta para mostrar el calendario
 Route::get('/calendario', [App\Http\Controllers\CitaController::class, 'calendario'])->name('calendario')->middleware('auth');
 
