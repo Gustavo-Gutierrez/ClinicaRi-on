@@ -55,6 +55,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\IndicadoreshcirujiaController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\BitacoraController;
+use App\Http\Controllers\ConsumiServicioController;
 use App\Http\Controllers\PrediccionController;
 
 /*
@@ -222,4 +223,12 @@ Route::get('/calendario', [App\Http\Controllers\CitaController::class, 'calendar
 Route::resource('/bitacoras', BitacoraController::class);
 
 Route::resource('/prediccion', PrediccionController::class);
+
+Route::get('/pago',[PagoController::class, 'create'])->name('pagofacil.form')
+->middleware('auth');
+Route::post('/consumirServicio',[ConsumiServicioController::class, 'RecolectarDatos'])->name('/consumirServicio')
+->middleware('auth');
+Route::post('/consultar', [ConsumiServicioController::class, 'ConsultarEstado'])
+->middleware('auth');
+Route::post('/callback', [ConsumiServicioController::class, 'UrlCallback']);
 
